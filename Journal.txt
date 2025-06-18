@@ -24,3 +24,4 @@ Added the clear_console (Work in progress) and modified the get_details.
 
 18/6/25 - Fixed the clear_console() and working on fixing the directions showing as "South" instead of showing "is South".
 Continued fixing the directions, and copied all the cave areas into main_test to test the areas after cave as well as fixing the link_areas.
+Finished the clear_console() and still work in progress with modifying the print() for all Areas as well as Cardinal & Ordinal directions.

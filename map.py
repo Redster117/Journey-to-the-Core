@@ -4,10 +4,9 @@ class Map:
     def __init__(self, area_name):
         """Sets class attributes."""
         self.name = area_name
-        self.description = ""
+        self.description = " "
         self.linked_areas = {}
         self.character = None
-        self.compass = ["north", "east", "south", "west"]
 
     def set_name(self, area_name):
         """Sets the area name"""
