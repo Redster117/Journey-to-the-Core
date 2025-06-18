@@ -1,0 +1,26 @@
+27/5/25 - Set up the repo for the Hunt the Wumpus project
+Spent some time learning about the original projet 1973 game.
+Created the cave class document and wrote the first attributes (name and description)
+
+30/5/25 - Write the main.py program to call the class and make the first cave object. Modified the attributes to set up name on installation.
+Wrote setter and getter methods for each attributes. Started planning the layout of the caves.
+2/6/25 - Wrote a dictionary attribute to store the links to other cave objects.
+Wrote and tested a method to print the linked_caves dictionary to the terminal
+
+3/6/25 - Added code to the main program to allow the player to move between different cave objects. Set up a new character class and test program.
+Created 'Blorpington - The Wumpus Character' in the test program and tested the conversation method.
+
+4/6/25 - Created the Enemy sub-class (of Character) and added its own methods for setting and getting the Enemy's weakness.
+Wrote a method for fight() that overrides the fight() method in the super-class. Updated the char_text code to test the new subclass objects (particularly the weakness and fight methods).
+
+6/6/25 - Finished testing the character in the char_test.py file. Added Blorpington object to the main program and added it to the dungeono object.
+Reworked the main loop to accept different inputs (moving, talking and fighting) - still need to finish the code to manage fighting.
+
+11/6/25 - Worked on fixing the two parameters in character.py and started fixing the "declining the fight" command in character.py.
+
+17/6/25 - Began changing the cave variable to area, and reworded cave.py to map.py. 
+Temporarily removed all combat and the enemy class. Began modifying the areas and changed the name from "Hunt the Blorpington" to "Journey to the Core".
+Added the clear_console (Work in progress) and modified the get_details.
+
+18/6/25 - Fixed the clear_console() and working on fixing the directions showing as "South" instead of showing "is South".
+Continued fixing the directions, and copied all the cave areas into main_test to test the areas after cave as well as fixing the link_areas.
