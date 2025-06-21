@@ -1,4 +1,6 @@
 """Map class for Journey to the Core."""
+
+
 class Map:
     """Defines attributes and methods for various location objects."""
     def __init__(self, area_name):
@@ -33,13 +35,18 @@ class Map:
         self.linked_areas[direction] = area_to_link
 
     def get_details(self):
-        """Sets the area details including name, description, and linked areas."""
-        print(self.name)
-        print("--------")
-        print(self.description)
-        print("--------")
-        for direction, area in self.linked_areas.items():
-            print(area.get_name() + " is " + direction)
+        """Displays area info unless it's just a directional node."""
+        direction_names = ["North", "East", "South", "West",
+                           "North East", "North West", "South East", "South West"]
+
+        if self.name.strip() in direction_names:
+            print(f"You are now heading: {self.name.strip()}")
+        else:
+            print(self.name)
+            print("--------")
+            print(self.description)
+            for direction, _ in self.linked_areas.items():
+                print(direction)  # Just show the direction, not area name
 
     def move(self, direction):
         """Moves to a linked area in the specified direction."""

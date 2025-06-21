@@ -2,36 +2,33 @@
 import os
 from map import Map
 
+
 def clear_console():
     """Clears the console."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-#Directions (These directions are disabled as it causes issues with the map)
-#Remember to copy one of these directions and paste them in the map objects
-#If using more than one direction, make sure to number each one as you go to avoid more errors.
-#north = Map(" ")
-#north_east = Map(" ")
-#east = Map(" ")
-#south_east = Map(" ")
-#south = Map(" ")
-#south_west = Map(" ")
-#west = Map(" ")
-#north_west = Map(" ")
+def print_compass(current_direction):
+    """Print an 8-point compass highlighting the current direction."""
+    RESET = "\033[0m"
+    HIGHLIGHT = "\033[93m"  # Yellow color code
 
-#left_way = Map("Left way")
-#left_way.set_description("You have chosen the left way.")
+    def mark(direction_name):
+        """Highlight the direction if it matches current_direction."""
+        if direction_name == current_direction:
+            return f"{HIGHLIGHT}{direction_name}{RESET}"
+        return direction_name
 
-#right_way = Map("Right way")
-#right_way.set_description("You have chosen the right way.")
-
-#two_ways = Map(" ")
-#two_ways.set_description("""Your path has split to two. Which way will you go?
-                        # - Any direction eg. Right (Any cardinal/ordinal direction)
-                        # - Any direction eg. Left (Any cardinal/ordinal direction)""")
+    print()
+    print("        " + mark("North"))
+    print("   " + mark("North West") + "       " + mark("North East"))
+    print(mark("West") + "       (You)       " + mark("East"))
+    print("   " + mark("South West") + "       " + mark("South East"))
+    print("        " + mark("South"))
+    print()
 
 
-#Map/area objects
+# Map/area objects
 clear_console()
 cave = Map("The Cave")
 cave.set_description("""You enter the cave and notice two paths:
@@ -46,10 +43,9 @@ small_opening = Map("The Small Opening")
 small_opening.set_description("""You proceed through the small opening and continue your
 walk through the cave.""")
 
-south = Map("You went South")
-south.set_description("Next direction, East")
+south = Map(" ")
 
-east = Map("You went East")
+east = Map(" ")
 
 
 two_ways = Map(" ")
@@ -73,14 +69,15 @@ two_ways2.set_description("""You have found another divided path!
                  - Right (South)""")
 
 south3 = Map("South")
-south3.set_description("You have stumbled upon a dead end. Go back and choose another path.")
+south3.set_description("""You have stumbled upon a dead end. Go back and
+choose another path.""")
 
 
-#Two ways in the cave
+# Two ways in the cave
 cave.link_areas(small_opening, "East")
 cave.link_areas(dark_tunnel, "South")
-dark_tunnel.link_areas(cave, "North") #Back to cave
-#Proceed through the small opening
+dark_tunnel.link_areas(cave, "North")  # Back to cave
+# Proceed through the small opening
 small_opening.link_areas(south, "South")
 south.link_areas(east, "East")
 east.link_areas(two_ways, "West")
@@ -88,13 +85,29 @@ two_ways.link_areas(north, "North East")
 
 
 current_area = cave
+last_direction = None  # Variable tracking current facing direction
+
+directions = [
+    "North", "East", "South", "West",
+    "North East", "North West", "South East", "South West"
+]
+
 while True:
     print("\n")
     current_area.get_details()
-    inhabitated = current_area.get_character()
-    if inhabitated is not None:
-        inhabitated.describe()
-    command = input("> ")
-    if command in ["North", "East", "South", "West", "North East", "North West",
-                   "South East", "South West"]:
+
+    # Update facing direction if current area is a direction node
+    if current_area.get_name().strip() in directions:
+        last_direction = current_area.get_name().strip()
+
+    command = input("> ").strip()
+
+    if command.upper() == "M":
+        if last_direction:
+            print_compass(last_direction)
+        else:
+            print("You are not currently facing any direction.")
+        continue
+
+    if command in directions:
         current_area = current_area.move(command)
