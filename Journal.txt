@@ -25,3 +25,12 @@ Added the clear_console (Work in progress) and modified the get_details.
 18/6/25 - Fixed the clear_console() and working on fixing the directions showing as "South" instead of showing "is South".
 Continued fixing the directions, and copied all the cave areas into main_test to test the areas after cave as well as fixing the link_areas.
 Finished the clear_console() and still work in progress with modifying the print() for all Areas as well as Cardinal & Ordinal directions.
+
+21/6/25 - Added flake8 to clean errors and find more detailed errors to fix (resulting in better and cleaner code format), and completely modified the def get_details to fix giving the directions and area names in main_test.py.
+Added two commands:
+- "N" = Tells the user which direction (Uses an 8 point compass) is the user currently facing.
+- "M" = Prints an 8 Point Compass and whatever direction the user is facing, the direction colour is changed to yellow, e.g. 
+    If user is facing South, the word colour is changed to Yellow (colour can be changed through main_test.py)
+
+IMPORTANT NOTE: All WIP for linked_areas, and area_name's are being worked on in the main_test.py. 
+Once the linked_areas and area_name codes' are finished, they will be transferred to the officail main.py.
