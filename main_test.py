@@ -54,6 +54,7 @@ southern_tunnel_1 = Map("Southern Tunnel 1")
 two_way_fork_1 = Map("First Split")
 two_way_fork_1.set_description("""Your path has split to two. Which way will you go?
                             Hint: Enter N to see your current facing direction.
+                            Hint: Enter M to reveal a compass
                          - Left (North East)
                          - Right (South)""")
 
@@ -112,18 +113,18 @@ southern_dead_end = Map("Southern Dead End")
 southern_dead_end.set_description("""You have stumbled upon a dead end. Go back and
 choose another path.""")
 
-# Area 22: Depper Cave
-clear_console()
-depper_cave = Map("Depper Cave")
-depper_cave.set_description("""Congratulations! You have reached the deeper parts of
+# Area 22: Deeper Cave
+deeper_cave = Map("Deeper Cave")
+deeper_cave.set_description("""Congratulations! You have reached the deeper parts of
 the cave. Be aware you may find some hostile monsters and requires you to fight.
 Good luck.""")
 
 
 # Beginning of the Cave
 cave.link_areas(small_opening, "East")
+small_opening.link_areas_opposite(cave, "West")
 cave.link_areas(dark_tunnel, "South")
-dark_tunnel.link_areas(cave, "North")  # Goes back to the cave entrance
+dark_tunnel.link_areas(cave, "North")
 
 # Small Opening onward
 small_opening.link_areas(southern_tunnel_1, "South")
@@ -151,7 +152,7 @@ eastern_corridor_2_return.link_areas(two_way_fork_1, "North")
 
 # Second fork
 two_way_fork_2.link_areas(southern_dead_end, "South")
-two_way_fork_2.link_areas(depper_cave, "East")
+two_way_fork_2.link_areas(deeper_cave, "East")
 southern_dead_end.link_areas(two_way_fork_2, "North")  # Goes back to the second fork
 
 
@@ -162,6 +163,68 @@ directions = [
     "North", "East", "South", "West",
     "North East", "North West", "South East", "South West"
 ]
+
+
+def print_map(current_location=None):
+    map_text = r"""
+Map
+North
+North West
+North East
+House: Starting point
+West
+●
+East
+Front Door
+Garage --> Car
+South West
+South East
+Cave Entrance
+South
+Cave = Black border
+Directions: South, East
+South
+West
+clear_console()
+East →
+South
+↓
+South
+↓
+East
+Left (North), or Straight (East)
+If the user goes in a loop, say, "It appears you went in a loop, go West to leave the loop".
+North
+Find nothing in this path, go East
+East→
+South
+↓
+↑
+North
+clear_console()
+→
+East →
+South
+↓
+You have reached the deeper parts of the cave. Be aware you may find some hostile monsters
+Left (North), or Right (South)
+clear_console()
+North East↗
+South
+↓
+Your path has spilt to two, Which way would you like to go? Left or Right
+You have reached a dead end
+Monster
+East→
+South
+↓
+You have reached a dead end, return to the last point you came from to continue your journey.
+↑
+North
+←West
+"""
+    print(map_text)
+
 
 while True:
     print("\n")
@@ -178,6 +241,11 @@ while True:
             print(f"You are currently facing: {facing_direction}")
         continue
 
+    # Show map
+    if command.lower() == "map":
+        print_map()
+        continue
+
     # Show only facing direction
     if command.upper() == "N":
         if facing_direction:
@@ -186,7 +254,7 @@ while True:
             print("You are not facing any direction yet.")
         continue
 
-    if command == "First Split":
+    elif command == "First Split":
         clear_console()
         current_area = two_way_fork_1
 
@@ -199,3 +267,35 @@ while True:
                    "North East", "North West", "South East", "South West"]:
         facing_direction = command  # Update facing direction
         current_area = current_area.move(command)
+
+    elif command.lower() in ["north", "n"]:
+        facing_direction = "North"
+        current_area = current_area.move("North")
+
+    elif command.lower() in ["east", "e"]:
+        facing_direction = "East"
+        current_area = current_area.move("East")
+
+    elif command.lower() in ["south", "s"]:
+        facing_direction = "South"
+        current_area = current_area.move("South")
+
+    elif command.lower() in ["west", "w"]:
+        facing_direction = "West"
+        current_area = current_area.move("West")
+
+    elif command.lower() in ["northeast", "north east", "ne"]:
+        facing_direction = "North East"
+        current_area = current_area.move("North East")
+
+    elif command.lower() in ["northwest", "north west", "nw"]:
+        facing_direction = "North West"
+        current_area = current_area.move("North West")
+
+    elif command.lower() in ["southeast", "south east", "se"]:
+        facing_direction = "South East"
+        current_area = current_area.move("South East")
+
+    elif command.lower() in ["southwest", "south west", "sw"]:
+        facing_direction = "South West"
+        current_area = current_area.move("South West")
