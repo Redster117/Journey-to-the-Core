@@ -33,16 +33,6 @@ class Map:
     def describe(self):
         print(self.description)
 
-    def link_areas(self, area_to_link, direction, bidirectional=False):
-        """Links this area to another area in a specified direction.
-           If bidirectional is True, links the reverse direction too."""
-        self.linked_areas[direction] = area_to_link
-
-        if bidirectional:
-            reverse = opposite_directions.get(direction)
-            if reverse:
-                area_to_link.linked_areas[reverse] = self
-
     def get_details(self):
         direction_names = ["North", "East", "South", "West",
                            "North East", "North West", "South East", "South West"]
@@ -61,6 +51,16 @@ class Map:
 
     def get_character(self):
         return self.character
+
+    def link_areas(self, area_to_link, direction, bidirectional=False):
+        """Links this area to another area in a specified direction.
+           If bidirectional is True, links the reverse direction too."""
+        self.linked_areas[direction] = area_to_link
+
+        if bidirectional:
+            reverse = opposite_directions.get(direction)
+            if reverse:
+                area_to_link.linked_areas[reverse] = self
 
     def link_areas_opposite(self, area_to_link, direction):
         """Links this area to another area in a specified direction, but hides it
