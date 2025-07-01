@@ -34,3 +34,5 @@ Added two commands:
 
 IMPORTANT NOTE: All WIP for linked_areas, and area_name's are being worked on in the main_test.py. 
 Once the linked_areas and area_name codes' are finished, they will be transferred to the officail main.py.
+
+1/7/25 - Added an ASCII map in the code aas well as fixing the hidded directions.
