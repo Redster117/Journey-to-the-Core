@@ -3,6 +3,5 @@
   "python.linting.pylintArgs": ["--max-line-length=300"],
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
-  "python.linting.flake8Enabled": true,
   "python.linting.mypyEnabled": false
 }
