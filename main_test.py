@@ -32,42 +32,54 @@ def print_ascii_map(current_area, discovered_areas):
     YELLOW = "\033[93m"
     RESET = "\033[0m"
 
-    def area_block(name):
-        if name == current_area.get_name():
-            return f"{YELLOW}{name[:15].center(15)}{RESET}"
-        elif name in discovered_areas:
-            return name[:15].center(15)
+
+    def label(name, width=11):
+        return f"{YELLOW}{name.center(width)}{RESET}" if name == current_area.get_name() else name.center(width)
+        
+    def box(name):
+        if name not in discovered_areas:
+            return ""
+        top = "   " + "_" * 11
+        content = ""
+        name_parts = name.split(" ", 1)
+        if len(name_parts) == 2:
+            line1 = label(name_parts[0])
+            line2 = label(name_parts[1])
+            content = f"  |{line1}|\n  |{line2}|"
         else:
-            return " " * 15
+            line = label(name)
+            content = f"  |{line}|"  # One-line name
+        bottom = "   " + "-" * 11
+        return f"{top}\n{content}\n{bottom}"
 
-    grid = [
-        " " * 40 + "JOURNEY TO THE CORE - LEVEL 1 MAP",
-        "",
-        area_block("House") + " → " + area_block("Front Door") + " → " + area_block("Garage") + " → " + area_block("Cave Entrance"),
-        " " * 32 + "↓",
-        area_block("The Cave"),
-        " " * 32 + "↓",
-        area_block("The Dark Tunnel"),
-        " " * 32 + "↓",
-        area_block("The Small Opening"),
-        " " * 32 + "↓",
-        area_block("Southern Tunnel 1"),
-        " " * 32 + "↓",
-        area_block("First Split"),
-        " " * 28 + "/           \\",
-        area_block("North East Corridor") + "     " + area_block("Eastern Corridor 2"),
-        "     ↓                          ↓",
-        area_block("Northern Tunnel") + "     " + area_block("Southern Tunnel 2"),
-        "     ↓                          ↓",
-        area_block("Eastern Corridor 1") + "     " + area_block("West Corridor"),
-        "     ↓                          ↓",
-        area_block("Second Split") + "     " + area_block("North Corridor"),
-        "     ↓                          ↓",
-        area_block("Deeper Cave") + "     " + area_block("Dead End"),
-    ]
+    def connector_down():
+        return "     |\n     V"
 
-    print("\n" + "\n".join(grid))
-    print("\nLegend: Yellow = Current Location | Hidden = Undiscovered")
+    def connector_right():
+        return "  ---> "
+
+    print("\n")
+
+    if "The Cave" in discovered_areas:
+        print(box("The Cave"))
+
+    if "The Dark Tunnel" in discovered_areas or "The Small Opening" in discovered_areas:
+        print(connector_down())
+        print("   _______")
+        print("  | East   |")
+        print("  | South  |")
+        print("   ‾‾‾‾‾‾‾")
+
+        if "The Small Opening" in discovered_areas:
+            print("           " + connector_right() + box("The Small Opening").strip().splitlines()[0])
+            print("                           " + box("The Small Opening").strip().splitlines()[1])
+            print("                           " + box("The Small Opening").strip().splitlines()[2])
+
+        if "The Dark Tunnel" in discovered_areas:
+            print(connector_down())
+            print(box("The Dark Tunnel"))
+
+    print("\nLegend: Yellow = Current Location | Hidden = Undiscovered\n")
 
 
 # Map/area objects
