@@ -28,58 +28,94 @@ def print_compass(current_direction=None):
     print(f"    {mark('South West')}  {mark('South')}  {mark('South East')}\n")
 
 
-def print_ascii_map(current_area, discovered_areas):
-    YELLOW = "\033[93m"
-    RESET = "\033[0m"
+YELLOW = "\033[93m"
+RESET = "\033[0m"
 
+def label(name, width=17):
+    return f"{YELLOW}{name.center(width)}{RESET}" if name == current_area.get_name() else name.center(width)
 
-    def label(name, width=11):
-        return f"{YELLOW}{name.center(width)}{RESET}" if name == current_area.get_name() else name.center(width)
-        
-    def box(name):
-        if name not in discovered_areas:
-            return ""
-        top = "   " + "_" * 11
-        content = ""
-        name_parts = name.split(" ", 1)
+def print_ascii_map(name):
+    if name not in discovered_areas:
+        return [" " * 19, " " * 19, " " * 19, " " * 19]
+
+    top = " " * 3 + "_" * 17
+    bottom = " " * 3 + "-" * 17
+
+    name_parts = name.split(" ", 1)
+    if name == current_area.get_name():
         if len(name_parts) == 2:
-            line1 = label(name_parts[0])
-            line2 = label(name_parts[1])
-            content = f"  |{line1}|\n  |{line2}|"
+            line1 = f"  |{YELLOW}{name_parts[0].center(17)}{RESET}|"
+            line2 = f"  |{YELLOW}{name_parts[1].center(17)}{RESET}|"
         else:
-            line = label(name)
-            content = f"  |{line}|"  # One-line name
-        bottom = "   " + "-" * 11
-        return f"{top}\n{content}\n{bottom}"
+            line1 = f"  |{YELLOW}{name.center(17)}{RESET}|"
+            line2 = " " * 21
+    else:
+        if len(name_parts) == 2:
+            line1 = f"  |{name_parts[0].center(17)}|"
+            line2 = f"  |{name_parts[1].center(17)}|"
+        else:
+            line1 = f"  |{name.center(17)}|"
+            line2 = " " * 21
 
-    def connector_down():
-        return "     |\n     V"
+    return [top, line1, line2, bottom]
 
-    def connector_right():
-        return "  ---> "
+def box(name):
+    return print_ascii_map(name)
 
-    print("\n")
+def connector_down():
+    return ["     |", "     V"]
 
-    if "The Cave" in discovered_areas:
-        print(box("The Cave"))
+def fork_box():
+    lines = ["   _______"]
+    if "The Small Opening" in discovered_areas:
+        lines[0] += "             ___________"
+        lines.append("  | East   |   --->   |     Small     |")
+        lines.append("  | South  |          |    Opening    |")
+        lines.append("   ‾‾‾‾‾‾‾             -----------------")
+    else:
+        lines.append("  | East   |")
+        lines.append("  | South  |")
+        lines.append("   ‾‾‾‾‾‾‾")
+    return lines
 
-    if "The Dark Tunnel" in discovered_areas or "The Small Opening" in discovered_areas:
-        print(connector_down())
-        print("   _______")
-        print("  | East   |")
-        print("  | South  |")
-        print("   ‾‾‾‾‾‾‾")
+def fork_split():
+    lines = []
+    if "First Split" in discovered_areas:
+        lines.append("       /                         \\")
+        left = "North East Corridor" if "North East Corridor" in discovered_areas else ""
+        right = "Eastern Corridor 2" if "Eastern Corridor 2" in discovered_areas else ""
+        lines.append(f"{label(left, 23)}     {label(right, 23)}")
+    return lines
 
-        if "The Small Opening" in discovered_areas:
-            print("           " + connector_right() + box("The Small Opening").strip().splitlines()[0])
-            print("                           " + box("The Small Opening").strip().splitlines()[1])
-            print("                           " + box("The Small Opening").strip().splitlines()[2])
+# Initialize game state variables before usage
+current_area = None
+facing_direction = None  # Tracks the player's current facing direction
+discovered_areas = set()
 
-        if "The Dark Tunnel" in discovered_areas:
-            print(connector_down())
-            print(box("The Dark Tunnel"))
+print("\n")
 
-    print("\nLegend: Yellow = Current Location | Hidden = Undiscovered\n")
+if "The Cave" in discovered_areas:
+    print("\n".join(box("The Cave")))
+
+if "The Dark Tunnel" in discovered_areas or "The Small Opening" in discovered_areas:
+    print("\n".join(connector_down()))
+    print("\n".join(fork_box()))
+
+if "The Dark Tunnel" in discovered_areas:
+    print("\n".join(connector_down()))
+    print("\n".join(box("The Dark Tunnel")))
+
+if "The Small Opening" in discovered_areas:
+    if "Southern Tunnel 1" in discovered_areas:
+        print("\n".join(connector_down()))
+        print("\n".join(box("Southern Tunnel 1")))
+
+    if "First Split" in discovered_areas:
+        print("\n".join(connector_down()))
+        print("\n".join(box("First Split")))
+        print("\n".join(fork_split()))
+
+print("\nLegend: Yellow = Current Location | Hidden areas stay invisible\n")
 
 
 # Map/area objects
