@@ -7,11 +7,8 @@ def clear_console():
     """Clears the console."""
     os.system('cls' if os.name == 'nt' else 'clear')
 
-
-# ANSI color codes for highlighting (only works in supported terminals)
+HIGHLIGHT = "\033[93m"
 RESET = "\033[0m"
-HIGHLIGHT = "\033[93m"  # Yellow
-
 
 def print_compass(current_direction=None):
     """Prints a compass with 8 directions. Highlights current direction if given."""
@@ -28,94 +25,73 @@ def print_compass(current_direction=None):
     print(f"    {mark('South West')}  {mark('South')}  {mark('South East')}\n")
 
 
-YELLOW = "\033[93m"
-RESET = "\033[0m"
+def print_ascii_map(current_area, discovered_areas):
+    import colorama
+    colorama.init()
 
-def label(name, width=17):
-    return f"{YELLOW}{name.center(width)}{RESET}" if name == current_area.get_name() else name.center(width)
+    def draw_box(name, width):
+        top = " " + "_" * width
+        label = f"{HIGHLIGHT}{name.center(width)}{RESET}" if name == current_area.get_name() else name.center(width)
+        mid = f"|{label}|"
+        bot = " " + "-" * width
+        return [top, mid, bot]
 
-def print_ascii_map(name):
-    if name not in discovered_areas:
-        return [" " * 19, " " * 19, " " * 19, " " * 19]
+    def print_horizontal_branch(parent, child, parent_w=11, child_w=17, arrow="----->", gap=4):
+        parent_box = draw_box(parent, parent_w)
+        child_box = draw_box(child, child_w)
 
-    top = " " * 3 + "_" * 17
-    bottom = " " * 3 + "-" * 17
+        arrow_line = " " * gap + arrow + " " * gap
+        arrow_total_width = len(arrow_line)
 
-    name_parts = name.split(" ", 1)
-    if name == current_area.get_name():
-        if len(name_parts) == 2:
-            line1 = f"  |{YELLOW}{name_parts[0].center(17)}{RESET}|"
-            line2 = f"  |{YELLOW}{name_parts[1].center(17)}{RESET}|"
-        else:
-            line1 = f"  |{YELLOW}{name.center(17)}{RESET}|"
-            line2 = " " * 21
-    else:
-        if len(name_parts) == 2:
-            line1 = f"  |{name_parts[0].center(17)}|"
-            line2 = f"  |{name_parts[1].center(17)}|"
-        else:
-            line1 = f"  |{name.center(17)}|"
-            line2 = " " * 21
+        print(parent_box[0] + " " * gap + " " * arrow_total_width + child_box[0])
+        print(parent_box[1] + arrow_line + child_box[1])
+        print(parent_box[2] + " " * gap + " " * arrow_total_width + child_box[2])
 
-    return [top, line1, line2, bottom]
+    def arrow_down(pad=8):
+        return [" " * pad + "|", " " * pad + "V"]
 
-def box(name):
-    return print_ascii_map(name)
+    def arrow_northeast(pad_x=9, pad_y=1):
+        lines = []
+        for _ in range(pad_y):
+            lines.append(" " * pad_x)
+        lines.append(" " * pad_x + "  /")
+        lines.append(" " * (pad_x + 1) + " /")
+        lines.append(" " * (pad_x + 2) + "-->")
+        return lines
 
-def connector_down():
-    return ["     |", "     V"]
+    print("\n")
 
-def fork_box():
-    lines = ["   _______"]
-    if "The Small Opening" in discovered_areas:
-        lines[0] += "             ___________"
-        lines.append("  | East   |   --->   |     Small     |")
-        lines.append("  | South  |          |    Opening    |")
-        lines.append("   ‾‾‾‾‾‾‾             -----------------")
-    else:
-        lines.append("  | East   |")
-        lines.append("  | South  |")
-        lines.append("   ‾‾‾‾‾‾‾")
-    return lines
+    # ========== Cave and Small Opening ==========
+    if "The Cave" in discovered_areas and "The Small Opening" in discovered_areas:
+        print_horizontal_branch("The Cave", "Small Opening")
+    elif "The Cave" in discovered_areas:
+        for line in draw_box("The Cave", width=11):
+            print(line)
 
-def fork_split():
-    lines = []
-    if "First Split" in discovered_areas:
-        lines.append("       /                         \\")
-        left = "North East Corridor" if "North East Corridor" in discovered_areas else ""
-        right = "Eastern Corridor 2" if "Eastern Corridor 2" in discovered_areas else ""
-        lines.append(f"{label(left, 23)}     {label(right, 23)}")
-    return lines
+    # ========== If Dark Tunnel is discovered (without Small Opening) ==========
+    if "The Dark Tunnel" in discovered_areas and "The Small Opening" not in discovered_areas:
+        for line in arrow_down(pad=8):
+            print(line)
+        for line in draw_box("The Dark Tunnel", width=17):
+            print(line)
 
-# Initialize game state variables before usage
-current_area = None
-facing_direction = None  # Tracks the player's current facing direction
-discovered_areas = set()
+    # ========== If both Small Opening and Dark Tunnel are discovered ==========
+    if "The Small Opening" in discovered_areas and "The Dark Tunnel" in discovered_areas:
+        for line in arrow_down(pad=14):
+            print(line)
 
-print("\n")
+        for line in draw_box("First Split", width=15):
+            print(line)
 
-if "The Cave" in discovered_areas:
-    print("\n".join(box("The Cave")))
+        # NE path (e.g. North East Corridor or Northern Tunnel later)
+        for line in arrow_northeast(pad_x=10, pad_y=1):
+            print(line)
 
-if "The Dark Tunnel" in discovered_areas or "The Small Opening" in discovered_areas:
-    print("\n".join(connector_down()))
-    print("\n".join(fork_box()))
+        # South path (e.g. Eastern Corridor 2 or Southern Tunnel 2)
+        for line in arrow_down(pad=14):
+            print(line)
 
-if "The Dark Tunnel" in discovered_areas:
-    print("\n".join(connector_down()))
-    print("\n".join(box("The Dark Tunnel")))
-
-if "The Small Opening" in discovered_areas:
-    if "Southern Tunnel 1" in discovered_areas:
-        print("\n".join(connector_down()))
-        print("\n".join(box("Southern Tunnel 1")))
-
-    if "First Split" in discovered_areas:
-        print("\n".join(connector_down()))
-        print("\n".join(box("First Split")))
-        print("\n".join(fork_split()))
-
-print("\nLegend: Yellow = Current Location | Hidden areas stay invisible\n")
+    print("\nLegend: Yellow = Current Location | Hidden areas stay invisible\n")
 
 
 # Map/area objects
@@ -295,5 +271,3 @@ while True:
             current_area = next_area
             discovered_areas.add(current_area.get_name())
         continue
-
-    print("Unrecognized command. Type a direction, 'map', 'M' for compass.")
