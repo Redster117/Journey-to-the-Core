@@ -36,7 +36,7 @@ def print_ascii_map(current_area, discovered_areas):
         bot = " " + "-" * width
         return [top, mid, bot]
 
-    def print_horizontal_branch(parent, child, parent_w=11, child_w=17, arrow="----->", gap=4):
+    def print_horizontal_branch(parent, child, parent_w=11, child_w=17, arrow="----->", gap=1):
         parent_box = draw_box(parent, parent_w)
         child_box = draw_box(child, child_w)
 
@@ -77,7 +77,7 @@ def print_ascii_map(current_area, discovered_areas):
 
     # ========== If both Small Opening and Dark Tunnel are discovered ==========
     if "The Small Opening" in discovered_areas and "The Dark Tunnel" in discovered_areas:
-        for line in arrow_down(pad=14):
+        for line in arrow_down(pad=10):
             print(line)
 
         for line in draw_box("First Split", width=15):
