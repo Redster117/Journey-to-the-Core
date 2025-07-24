@@ -13,21 +13,24 @@ RESET = "\033[0m"
 def print_compass(current_direction=None):
     """Prints a compass with 8 directions. Highlights current direction if given."""
 
-    def mark(direction):
+    def marked_direction(direction):
         return (
             f"{HIGHLIGHT}{direction}{RESET}"
             if direction == current_direction else direction
         )
 
     print("\nCompass:")
-    print(f"    {mark('North West')}  {mark('North')}  {mark('North East')}")
-    print(f"    {mark('West')}          ◉          {mark('East')}")
-    print(f"    {mark('South West')}  {mark('South')}  {mark('South East')}\n")
+    print(f"    {marked_direction('North West')}  {marked_direction('North')}  {marked_direction('North East')}")
+    print(f"    {marked_direction('West')}          ◉          {marked_direction('East')}")
+    print(f"    {marked_direction('South West')}  {marked_direction('South')}  {marked_direction('South East')}\n")
 
 
 def print_ascii_map(current_area, discovered_areas):
     import colorama
     colorama.init()
+
+    HIGHLIGHT = "\033[93m"
+    RESET = "\033[0m"
 
     def draw_box(name, width):
         top = " " + "_" * width
@@ -77,19 +80,32 @@ def print_ascii_map(current_area, discovered_areas):
 
     # ========== If both Small Opening and Dark Tunnel are discovered ==========
     if "The Small Opening" in discovered_areas and "The Dark Tunnel" in discovered_areas:
-        for line in arrow_down(pad=10):
+        # Arrow down from Small Opening (Southern Tunnel 1)
+        for line in arrow_down(pad=30):
             print(line)
 
-        for line in draw_box("First Split", width=15):
+        # Arrow down from Cave to Dark Tunnel
+        for line in arrow_down(pad=8):
+            print(line)
+        for line in draw_box("The Dark Tunnel", width=17):
             print(line)
 
-        # NE path (e.g. North East Corridor or Northern Tunnel later)
-        for line in arrow_northeast(pad_x=10, pad_y=1):
-            print(line)
-
-        # South path (e.g. Eastern Corridor 2 or Southern Tunnel 2)
-        for line in arrow_down(pad=14):
-            print(line)
+    # ========== First Split ==========
+    if "First Split" in discovered_areas:
+        if "The Dark Tunnel" in discovered_areas:
+            # Connector from Dark Tunnel to First Split (offset right)
+            print(" " * 25 + "|")
+            print(" " * 25 + "V")
+            print(" " * 25 + "0------> " + draw_box("First Split", width=15)[0])
+            print(" " * 25 + "          " + draw_box("First Split", width=15)[1])
+            print(" " * 25 + "          " + draw_box("First Split", width=15)[2])
+        else:
+            # Connector from Small Opening to First Split (directly below)
+            for line in arrow_down(pad=30):
+                print(line)
+            print(" " * 30 + "0------> " + draw_box("First Split", width=15)[0])
+            print(" " * 30 + "          " + draw_box("First Split", width=15)[1])
+            print(" " * 30 + "          " + draw_box("First Split", width=15)[2])
 
     print("\nLegend: Yellow = Current Location | Hidden areas stay invisible\n")
 
@@ -244,6 +260,19 @@ while True:
 
     if command.lower() == "map":
         print_ascii_map(current_area, discovered_areas)
+        continue
+    
+    if command.lower() == "testing map":
+        print(""" ___________          _________________
+|  The Cave | -----> |  Small Opening  |
+ -----------          -----------------
+                              |
+                              V
+        |             ________________
+        V            |   First Split  |
+ _________________   ------------------
+| The Dark Tunnel |
+ -----------------""")
         continue
 
     # Movement (Full Direction Names & Shortcuts)
