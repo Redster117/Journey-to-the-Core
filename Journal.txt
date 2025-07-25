@@ -56,3 +56,4 @@ e.g.
 22/7/25 - fixed the yellow box issue in the main_test.py file, and the box function is now defined correctly.
 23/7/25 - Fixing the map layout still and fixed the small opening box size
 24/7/25 - Continued fixing the map layout and adding the First split to the graphical map.
+25/7/25 - Fixed the map layout for First split and now moving on with adding other areas including corridors and tunnels.

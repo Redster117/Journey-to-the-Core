@@ -1,5 +1,6 @@
-"""Info about the map."""
+"""Testing cave system map."""
 import os
+import colorama
 from map import Map
 
 
@@ -26,86 +27,62 @@ def print_compass(current_direction=None):
 
 
 def print_ascii_map(current_area, discovered_areas):
-    import colorama
     colorama.init()
 
     HIGHLIGHT = "\033[93m"
-    RESET = "\033[0m"
+    RESET     = "\033[0m"
 
     def draw_box(name, width):
-        top = " " + "_" * width
+        top   = " " + "_" * width
         label = f"{HIGHLIGHT}{name.center(width)}{RESET}" if name == current_area.get_name() else name.center(width)
-        mid = f"|{label}|"
-        bot = " " + "-" * width
+        mid   = f"|{label}|"
+        bot   = " " + "-" * width
         return [top, mid, bot]
 
-    def print_horizontal_branch(parent, child, parent_w=11, child_w=17, arrow="----->", gap=1):
-        parent_box = draw_box(parent, parent_w)
-        child_box = draw_box(child, child_w)
-
-        arrow_line = " " * gap + arrow + " " * gap
-        arrow_total_width = len(arrow_line)
-
-        print(parent_box[0] + " " * gap + " " * arrow_total_width + child_box[0])
-        print(parent_box[1] + arrow_line + child_box[1])
-        print(parent_box[2] + " " * gap + " " * arrow_total_width + child_box[2])
-
-    def arrow_down(pad=8):
+    def arrow_down(pad):
         return [" " * pad + "|", " " * pad + "V"]
-
-    def arrow_northeast(pad_x=9, pad_y=1):
-        lines = []
-        for _ in range(pad_y):
-            lines.append(" " * pad_x)
-        lines.append(" " * pad_x + "  /")
-        lines.append(" " * (pad_x + 1) + " /")
-        lines.append(" " * (pad_x + 2) + "-->")
-        return lines
 
     print("\n")
 
-    # ========== Cave and Small Opening ==========
+    # 1) Cave → Small Opening
     if "The Cave" in discovered_areas and "The Small Opening" in discovered_areas:
-        print_horizontal_branch("The Cave", "Small Opening")
+        cave_box    = draw_box("The Cave",        width=11)
+        opening_box = draw_box("Small Opening",   width=17)
+        for i, (line_c, line_o) in enumerate(zip(cave_box, opening_box)):
+            if i == 1:
+                # Only print the arrow on the middle line
+                arrow = " -----> "
+            else:
+                arrow = "        "
+            print(line_c + arrow + line_o)
     elif "The Cave" in discovered_areas:
         for line in draw_box("The Cave", width=11):
             print(line)
 
-    # ========== If Dark Tunnel is discovered (without Small Opening) ==========
-    if "The Dark Tunnel" in discovered_areas and "The Small Opening" not in discovered_areas:
+    # 2) Vertical down from Cave → Dark Tunnel (only if discovered)
+    if "The Dark Tunnel" in discovered_areas:
         for line in arrow_down(pad=8):
             print(line)
         for line in draw_box("The Dark Tunnel", width=17):
             print(line)
 
-    # ========== If both Small Opening and Dark Tunnel are discovered ==========
-    if "The Small Opening" in discovered_areas and "The Dark Tunnel" in discovered_areas:
-        # Arrow down from Small Opening (Southern Tunnel 1)
+    # 3) Junction from Small Opening → First Split
+    if "First Split" in discovered_areas:
+        # vertical from Small Opening
         for line in arrow_down(pad=30):
             print(line)
 
-        # Arrow down from Cave to Dark Tunnel
-        for line in arrow_down(pad=8):
-            print(line)
-        for line in draw_box("The Dark Tunnel", width=17):
-            print(line)
+        # ◆ plus arrow to First Split
+        first_split_box = draw_box("First Split", width=15)
+        # top of First Split
+        print(" " * 29 + " ◆------> " + first_split_box[0])
+        # mid + bot of First Split
+        print(" " * 37 + first_split_box[1])
+        print(" " * 37 + first_split_box[2])
 
-    # ========== First Split ==========
-    if "First Split" in discovered_areas:
-        if "The Dark Tunnel" in discovered_areas:
-            # Connector from Dark Tunnel to First Split (offset right)
-            print(" " * 25 + "|")
-            print(" " * 25 + "V")
-            print(" " * 25 + "0------> " + draw_box("First Split", width=15)[0])
-            print(" " * 25 + "          " + draw_box("First Split", width=15)[1])
-            print(" " * 25 + "          " + draw_box("First Split", width=15)[2])
-        else:
-            # Connector from Small Opening to First Split (directly below)
-            for line in arrow_down(pad=30):
-                print(line)
-            print(" " * 30 + "0------> " + draw_box("First Split", width=15)[0])
-            print(" " * 30 + "          " + draw_box("First Split", width=15)[1])
-            print(" " * 30 + "          " + draw_box("First Split", width=15)[2])
+        # 4) arrow down under First Split
+        for line in arrow_down(pad=37 + (15 // 2)):
+            print(line)
 
     print("\nLegend: Yellow = Current Location | Hidden areas stay invisible\n")
 
@@ -135,8 +112,8 @@ southern_tunnel_1 = Map("Southern Tunnel 1")
 # Area 5: Fork - Two Ways
 two_way_fork_1 = Map("First Split")
 two_way_fork_1.set_description("""Your path has split to two. Which way will you go?
-                            Hint: Enter N to see your current facing direction.
-                            Hint: Enter M to reveal a compass
+                            Hint: Enter M to open map
+                            Hint: Enter C to reveal a compass
                          - Left (North East)
                          - Right (South)""")
 
@@ -252,27 +229,32 @@ while True:
     command = input("> ").strip()
 
     # Compass Display
-    if command.upper() == "M":
+    if command.upper() == "C":
         print_compass(facing_direction)
         if facing_direction:
             print(f"You are currently facing: {facing_direction}")
         continue
-
+    
+    # Map Display
     if command.lower() == "map":
+        clear_console()
         print_ascii_map(current_area, discovered_areas)
-        continue
+
     
     if command.lower() == "testing map":
         print(""" ___________          _________________
 |  The Cave | -----> |  Small Opening  |
  -----------          -----------------
-                              |
-                              V
-        |             ________________
-        V            |   First Split  |
- _________________   ------------------
-| The Dark Tunnel |
- -----------------""")
+        |                     |
+        |                     |                           ↗
+        V                     |                          /
+ _________________            |           ______________/
+| The Dark Tunnel |           ◆------->  | First Split |
+ -----------------                        --------------  
+                                                |
+                                                |
+                                                V
+              """)
         continue
 
     # Movement (Full Direction Names & Shortcuts)
