@@ -35,7 +35,8 @@ Added two commands:
 IMPORTANT NOTE: All WIP for linked_areas, and area_name's are being worked on in the main_test.py. 
 Once the linked_areas and area_name codes' are finished, they will be transferred to the officail main.py.
 
-1/7/25 - Added an ASCII map in the code as well as fixing the hidded directions. Evening progress: continued fixing the progress (ascii) map including its format. My aim is to create an ascii map similar to the excel file I created for areas and directions.
+1/7/25 - Added an ASCII map in the code as well as fixing the hidded directions. Evening progress: continued fixing the progress (ascii) map including its format.
+My aim is to create an ascii map similar to the excel file I created for areas and directions.
 e.g.
 
             __________
@@ -53,7 +54,14 @@ e.g.
             | Tunnel |
             ----------
 2/7/25 - Removed flake8 and fixed the map format, currently fixing the yellow colour for the map
-22/7/25 - fixed the yellow box issue in the main_test.py file, and the box function is now defined correctly.
+22/7/25 - Fixed the yellow colour issue in the main_test.py file, and the box function is now defined correctly.
 23/7/25 - Fixing the map layout still and fixed the small opening box size
 24/7/25 - Continued fixing the map layout and adding the First split to the graphical map.
 25/7/25 - Fixed the map layout for First split and now moving on with adding other areas including corridors and tunnels.
+26/7/25 - Fixed the error with the map layout printing duplicates of Dark tunnel and First Fork (Changed the name Split to Fork).
+Changed the two commands "M", "N" to "map", "cp" or "compass".
+Fixed the yellow colour bug for The Small Opening and added all corridors and tunnels for South Path after First Fork in the map layout.
+Added arrows, vertical & horizontal lines, corners, and corner connectors e.g ◆───◆
+                                                                                   │
+                                                                                   │
+                                                                                   ◆

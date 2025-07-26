@@ -29,59 +29,122 @@ def print_compass(current_direction=None):
 def print_ascii_map(current_area, discovered_areas):
     colorama.init()
 
-    HIGHLIGHT = "\033[93m"
-    RESET     = "\033[0m"
-
     def draw_box(name, width):
         top   = " " + "_" * width
         label = f"{HIGHLIGHT}{name.center(width)}{RESET}" if name == current_area.get_name() else name.center(width)
         mid   = f"|{label}|"
-        bot   = " " + "-" * width
+        bot   = " " + "─" * width
         return [top, mid, bot]
 
-    def arrow_down(pad):
-        return [" " * pad + "|", " " * pad + "V"]
+    # 4 direction arrows
+    def arrow_up(pad):
+        return [" " * pad + "Ʌ", " " * pad + "│"]
 
-    print("\n")
+    def arrow_down(pad):
+        return [" " * pad + "│", " " * pad + "V"]
+
+    def arrow_left(pad, length=5):
+        return [" " * pad + "<" + "─" * length]
+
+    def arrow_right(pad, length=5):
+        return [" " * pad + "─" * length + ">"]
+
+    # Straight lines
+    def vertical(pad, length=2):
+        return [" " * pad + "│" for _ in range(length)]
+
+    def horizontal(pad, length=2):
+        return [" " * pad + "─" * length]
+    
+    # Straight lines with ◆ (used for corners in corridors & tunnels)
+    def corner_up(pad, length=1):
+        return [" " * pad + "◆"] + [" " * pad + "│" for _ in range(length)]
+
+    def corner_down(pad, length=1):
+        return [" " * pad + "│" for _ in range(length)] + [" " * pad + "◆"]
+
+    def corner_left(pad, length=5):
+        return [" " * pad + "◆" + "─" * length]
+
+    def corner_right(pad, length=5):
+        return [" " * pad + "─" * length + "◆"]
+
+    def corner_connector_vertical(pad, length=5):
+        return [" " * pad + "│" for _ in range(length) + "◆"]
+
+    def corner_connector_horizontal(pad, length=5):
+        return [" " * pad + "◆" + "─" * length + "◆"]
 
     # 1) Cave → Small Opening
     if "The Cave" in discovered_areas and "The Small Opening" in discovered_areas:
-        cave_box    = draw_box("The Cave",        width=11)
-        opening_box = draw_box("Small Opening",   width=17)
+        cave_box = draw_box("The Cave", width=11)
+        opening_box = draw_box("The Small Opening", width=18)
         for i, (line_c, line_o) in enumerate(zip(cave_box, opening_box)):
             if i == 1:
                 # Only print the arrow on the middle line
-                arrow = " -----> "
+                arrow = " ─────> "
             else:
-                arrow = "        "
+                arrow = "         "
             print(line_c + arrow + line_o)
     elif "The Cave" in discovered_areas:
         for line in draw_box("The Cave", width=11):
             print(line)
 
-    # 2) Vertical down from Cave → Dark Tunnel (only if discovered)
-    if "The Dark Tunnel" in discovered_areas:
+    # 2) Small Opening → First Fork (The Dark Tunnel modified for map format)
+    if "The Dark Tunnel" in discovered_areas and "First Fork" in discovered_areas:
+        first_fork_box = draw_box("First Fork", width=15)
+        dark_tunnel_box = draw_box("The Dark Tunnel", width=17)
+
+        print(" " * 8 + "│" + " " * 22 + "│")
+        print(" " * 8 + "V" + " " * 22 + "│")
+        # top line
+        print(dark_tunnel_box[0] + " " * 13 + "│" * 1 + " " * 8 + first_fork_box[0])
+        # mid line
+        print(dark_tunnel_box[1] + " " * 11 + " ◆──────> " + first_fork_box[1])
+        # bot line
+        print(dark_tunnel_box[2] + " " * 22 + first_fork_box[2])
+        
+    elif "The Dark Tunnel" in discovered_areas:
         for line in arrow_down(pad=8):
             print(line)
         for line in draw_box("The Dark Tunnel", width=17):
             print(line)
 
-    # 3) Junction from Small Opening → First Split
-    if "First Split" in discovered_areas:
+    elif "First Fork" in discovered_areas:
         # vertical from Small Opening
-        for line in arrow_down(pad=30):
+        for line in vertical(pad=30):
             print(line)
+        first_fork_box = draw_box("First Fork", width=15)
+        # top of First Fork
+        print(" " * 30 + "│" + " " * 8 + first_fork_box[0])
+        # mid of First Fork
+        print(" " * 29 + " ◆──────> " + first_fork_box[1])
+        # bot of First Fork
+        print(" " * 39 + first_fork_box[2])
+    
+    if "Eastern Corridor 2" in discovered_areas and "Southern Tunnel 2" in discovered_areas and "West Corridor" in discovered_areas and "North Corridor" in discovered_areas and "Dead End" in discovered_areas:
+        print(" " * 47 + "│")
+        print(" " * 47 + "│")
+        print(" " * 47 + "◆" + "─" * 3 + "◆")
+        print(" " * 52 + "│")
+        print(" " * 35 + "Dead End" + " " * 9 + "│")
+        print(" " * 39 + "│" + " " * 12 + "│")
+        print(" " * 39 + "◆" + "─" * 12 + "◆")
 
-        # ◆ plus arrow to First Split
-        first_split_box = draw_box("First Split", width=15)
-        # top of First Split
-        print(" " * 29 + " ◆------> " + first_split_box[0])
-        # mid + bot of First Split
-        print(" " * 37 + first_split_box[1])
-        print(" " * 37 + first_split_box[2])
-
-        # 4) arrow down under First Split
-        for line in arrow_down(pad=37 + (15 // 2)):
+    elif "Eastern Corridor 2" in discovered_areas:
+        for line in vertical(pad=47, length=2):
+            print(line)
+    
+    elif "Southern Tunnel 2" in discovered_areas:
+        for line in corner_connector_horizontal(pad=47, length=5):
+            print(line)
+    
+    elif "West Corridor" in discovered_areas:
+        for line in vertical(pad=53, length=3):
+            print(line)
+    
+    elif "North Corridor" in discovered_areas:
+        for line in corner_connector_horizontal(pad=40, length=12):
             print(line)
 
     print("\nLegend: Yellow = Current Location | Hidden areas stay invisible\n")
@@ -110,10 +173,10 @@ walk through the cave.""")
 southern_tunnel_1 = Map("Southern Tunnel 1")
 
 # Area 5: Fork - Two Ways
-two_way_fork_1 = Map("First Split")
-two_way_fork_1.set_description("""Your path has split to two. Which way will you go?
-                            Hint: Enter M to open map
-                            Hint: Enter C to reveal a compass
+first_fork = Map("First Fork")
+first_fork.set_description("""Your path has split to two. Which way will you go?
+                            Hint: Enter map to open map
+                            Hint: Enter cp/compass to reveal a compass
                          - Left (North East)
                          - Right (South)""")
 
@@ -136,21 +199,6 @@ north_corridor = Map("North Corridor")
 northern_dead_end = Map("Dead End")
 northern_dead_end.set_description("""You have reached a dead end, return to the last
 point you came from to continue your journey.""")
-
-# Area 12: Return to the first fork Area 12 - 16
-north_corridor_return = Map("North Corridor Return")
-
-# Area 13: West Corridor Return
-west_corridor_return = Map("West Corridor Return")
-
-# Area 14: Southern Tunnel 2 - Return
-southern_tunnel_2_return = Map("Southern Tunnel 2 Return")
-
-# Area 15: Eastern Corridor 2 - Return
-eastern_corridor_2_return = Map("Eastern Corridor 2 Return")
-
-# Area 16: South Corridor Return
-south_corridor_return = Map("South Corridor Return")
 
 # Area 17: North-East Path
 north_east_corridor = Map("North East Corridor")
@@ -187,27 +235,27 @@ dark_tunnel.link_areas(cave, "North")
 
 # Small Opening onward
 small_opening.link_areas(southern_tunnel_1, "South")
-southern_tunnel_1.link_areas(two_way_fork_1, "East")
+southern_tunnel_1.link_areas(first_fork, "East")
 
-# First Fork
-two_way_fork_1.link_areas(north_east_corridor, "North East")
+# First Fork - North East Path
+first_fork.link_areas(north_east_corridor, "North East")
 north_east_corridor.link_areas(northern_tunnel, "North")
 northern_tunnel.link_areas(eastern_corridor_1, "East")
 eastern_corridor_1.link_areas(two_way_fork_2, "South")
 
 # First Fork - South Path
-two_way_fork_1.link_areas(eastern_corridor_2, "South")
+first_fork.link_areas(eastern_corridor_2, "South")
 eastern_corridor_2.link_areas(southern_tunnel_2, "East")
 southern_tunnel_2.link_areas(west_corridor, "South")
 west_corridor.link_areas(north_corridor, "West")
 north_corridor.link_areas(northern_dead_end, "North")
 
-# First Fork - South Path (Goes back to the first fork)
-northern_dead_end.link_areas(north_corridor_return, "South")
-north_corridor_return.link_areas(west_corridor_return, "East")
-west_corridor_return.link_areas(southern_tunnel_2_return, "North")
-southern_tunnel_2_return.link_areas(eastern_corridor_2_return, "West")
-eastern_corridor_2_return.link_areas(two_way_fork_1, "North")
+# First Fork - South Path - Reversed
+northern_dead_end.link_areas_opposite(north_corridor, "South")
+north_corridor.link_areas_opposite(west_corridor, "East")
+west_corridor.link_areas_opposite(southern_tunnel_2, "North")
+southern_tunnel_2.link_areas_opposite(eastern_corridor_2, "West")
+eastern_corridor_2.link_areas_opposite(first_fork, "North")
 
 # Second fork
 two_way_fork_2.link_areas(southern_dead_end, "South")
@@ -229,7 +277,7 @@ while True:
     command = input("> ").strip()
 
     # Compass Display
-    if command.upper() == "C":
+    if command.lower() == "cp" or command.lower() == "compass":
         print_compass(facing_direction)
         if facing_direction:
             print(f"You are currently facing: {facing_direction}")
@@ -239,21 +287,19 @@ while True:
     if command.lower() == "map":
         clear_console()
         print_ascii_map(current_area, discovered_areas)
-
     
     if command.lower() == "testing map":
-        print(""" ___________          _________________
-|  The Cave | -----> |  Small Opening  |
- -----------          -----------------
-        |                     |
-        |                     |                           ↗
-        V                     |                          /
- _________________            |           ______________/
-| The Dark Tunnel |           ◆------->  | First Split |
- -----------------                        --------------  
-                                                |
-                                                |
-                                                V
+        print(""" ___________          __________________
+|  The Cave | ─────> |The Small Opening |
+ ───────────          ──────────────────
+        │                      │
+        V                      │
+ _________________             │         _______________
+| The Dark Tunnel |            ◆──────> |   First Fork  |
+ ─────────────────                       ───────────────
+                                               │
+                                               │
+                                               ◆
               """)
         continue
 
