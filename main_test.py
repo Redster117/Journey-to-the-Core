@@ -90,20 +90,106 @@ def print_ascii_map(current_area, discovered_areas):
         for line in draw_box("The Cave", width=11):
             print(line)
 
-    # 2) Small Opening → First Fork (The Dark Tunnel modified for map format)
-    if "The Dark Tunnel" in discovered_areas and "First Fork" in discovered_areas:
+    # 2) First Fork North East Path
+    # Dark Tunnel not Discovered
+    if "Second Fork" in discovered_areas and "Eastern Corridor 1" in discovered_areas and "Northern Tunnel" in discovered_areas and "North East Corridor" in discovered_areas and "The Dark Tunnel" not in discovered_areas and "First Fork" in discovered_areas:
+        first_fork_box = draw_box("First Fork", width=15)
+        dark_tunnel_box = draw_box("The Dark Tunnel", width=17)
+        second_fork_box = draw_box("Second Fork", width=15)
+
+        print(" " * 30 + "│" + " " * 25 + "◆" + "─" * 11 + "◆")
+        print(" " * 30 + "│" + " " * 25 + "◆" + " " * 11 + "│")
+        print(" " * 30 + "│" * 1 + " " * 8 + first_fork_box[0] + "/" + " " * 5 + second_fork_box[0])
+        print(" " * 29 + " ◆──────> " + first_fork_box[1] + " " * 5 + second_fork_box[1])
+        print(" " * 39 + first_fork_box[2] + " " * 6 + second_fork_box[2])
+
+    # Dark Tunnel Discovered
+    elif "Second Fork" in discovered_areas and "Eastern Corridor 1" in discovered_areas and "Northern Tunnel" in discovered_areas and "North East Corridor" in discovered_areas and "The Dark Tunnel" in discovered_areas and "First Fork" in discovered_areas:
+        first_fork_box = draw_box("First Fork", width=15)
+        dark_tunnel_box = draw_box("The Dark Tunnel", width=17)
+        second_fork_box = draw_box("Second Fork", width=15)
+
+        print(" " * 8 + "│" + " " * 22 + "│" + " " * 25 + "◆" + "─" * 11 + "◆")
+        print(" " * 8 + "V" + " " * 22 + "│" + " " * 25 + "◆" + " " * 11 + "│")
+        print(dark_tunnel_box[0] + " " * 13 + "│" * 1 + " " * 8 + first_fork_box[0] + "/" + " " * 5 + second_fork_box[0])
+        print(dark_tunnel_box[1] + " " * 11 + " ◆──────> " + first_fork_box[1] + " " * 5 + second_fork_box[1])
+        print(dark_tunnel_box[2] + " " * 22 + first_fork_box[2] + " " * 6 + second_fork_box[2])
+    
+    # Dark Tunnel not Discovered
+    elif "Eastern Corridor 1" in discovered_areas and "Northern Tunnel" in discovered_areas and "North East Corridor" in discovered_areas and "The Dark Tunnel" not in discovered_areas and "First Fork" in discovered_areas:
+        first_fork_box = draw_box("First Fork", width=15)
+
+        print(" " * 30 + "│" + " " * 25 + "◆" + "─" * 11 + "◆")
+        print(" " * 30 + "│" + " " * 25 + "◆" + " " * 11 + "│")
+        print(" " * 30 + "│" * 1 + " " * 8 + first_fork_box[0] + "/" + " " * 12 + "│")
+        print(" " * 29 + " ◆──────> " + first_fork_box[1])
+        print(" " * 39 + first_fork_box[2])
+    
+    # Dark Tunnel Discovered
+    elif "Eastern Corridor 1" in discovered_areas and "Northern Tunnel" in discovered_areas and "North East Corridor" in discovered_areas and "The Dark Tunnel" in discovered_areas and "First Fork" in discovered_areas:
+        first_fork_box = draw_box("First Fork", width=15)
+        dark_tunnel_box = draw_box("The Dark Tunnel", width=17)
+
+        print(" " * 8 + "│" + " " * 22 + "│" + " " * 25 + "◆" + "─" * 11 + "◆")
+        print(" " * 8 + "V" + " " * 22 + "│" + " " * 25 + "◆" + " " * 11 + "│")
+        print(dark_tunnel_box[0] + " " * 13 + "│" * 1 + " " * 8 + first_fork_box[0] + "/" + " " * 12 + "│")
+        print(dark_tunnel_box[1] + " " * 11 + " ◆──────> " + first_fork_box[1])
+        print(dark_tunnel_box[2] + " " * 22 + first_fork_box[2])
+    
+    # Dark Tunnel Discovered
+    elif "Northern Tunnel" in discovered_areas and "North East Corridor" in discovered_areas and "The Dark Tunnel" in discovered_areas and "First Fork" in discovered_areas:
+        first_fork_box = draw_box("First Fork", width=15)
+        dark_tunnel_box = draw_box("The Dark Tunnel", width=17)
+
+        print(" " * 8 + "│" + " " * 22 + "│" + " " * 25 + "◆")
+        print(" " * 8 + "V" + " " * 22 + "│" + " " * 25 + "◆")
+        print(dark_tunnel_box[0] + " " * 13 + "│" * 1 + " " * 8 + first_fork_box[0] + "/")
+        print(dark_tunnel_box[1] + " " * 11 + " ◆──────> " + first_fork_box[1])
+        print(dark_tunnel_box[2] + " " * 22 + first_fork_box[2])
+    
+    # Dark Tunnel not Discovered
+    elif "Northern Tunnel" in discovered_areas and "North East Corridor" in discovered_areas and "The Dark Tunnel" not in discovered_areas:
+        first_fork_box = draw_box("First Fork", width=15)
+        print(" " * 30 + "│")
+        print(" " * 30 + "│" + " " * 25 + "◆")
+        print(" " * 30 + "│" + " " * 25 + "◆")
+        print(" " * 30 + "│" + " " * 8 + first_fork_box[0] + "/")
+        print(" " * 29 + " ◆──────> " + first_fork_box[1])
+        print(" " * 39 + first_fork_box[2])
+
+    # Dark Tunnel Discovered
+    elif "North East Corridor" in discovered_areas and "The Dark Tunnel" in discovered_areas and "First Fork" in discovered_areas:
+        first_fork_box = draw_box("First Fork", width=15)
+        dark_tunnel_box = draw_box("The Dark Tunnel", width=17)
+
+        print(" " * 8 + "│" + " " * 22 + "│")
+        print(" " * 8 + "V" + " " * 22 + "│" + " " * 25 + "◆")
+        print(dark_tunnel_box[0] + " " * 13 + "│" * 1 + " " * 8 + first_fork_box[0] + "/")
+        print(dark_tunnel_box[1] + " " * 11 + " ◆──────> " + first_fork_box[1])
+        print(dark_tunnel_box[2] + " " * 22 + first_fork_box[2])
+
+    # Dark Tunnel Discovered
+    elif "The Dark Tunnel" in discovered_areas and "First Fork" in discovered_areas:
         first_fork_box = draw_box("First Fork", width=15)
         dark_tunnel_box = draw_box("The Dark Tunnel", width=17)
 
         print(" " * 8 + "│" + " " * 22 + "│")
         print(" " * 8 + "V" + " " * 22 + "│")
-        # top line
         print(dark_tunnel_box[0] + " " * 13 + "│" * 1 + " " * 8 + first_fork_box[0])
-        # mid line
         print(dark_tunnel_box[1] + " " * 11 + " ◆──────> " + first_fork_box[1])
-        # bot line
         print(dark_tunnel_box[2] + " " * 22 + first_fork_box[2])
-        
+    
+    # Dark Tunnel not Discovered
+    elif "North East Corridor" in discovered_areas and "The Dark Tunnel" not in discovered_areas:
+        first_fork_box = draw_box("First Fork", width=15)
+        # vertical from Small Opening
+        for line in vertical(pad=30):
+            print(line)
+        print(" " * 30 + "│" + " " * 25 + "◆")
+        print(" " * 30 + "│" + " " * 8 + first_fork_box[0] + "/")
+        print(" " * 29 + " ◆──────> " + first_fork_box[1])
+        print(" " * 39 + first_fork_box[2])
+  
     elif "The Dark Tunnel" in discovered_areas:
         for line in arrow_down(pad=8):
             print(line)
@@ -121,8 +207,9 @@ def print_ascii_map(current_area, discovered_areas):
         print(" " * 29 + " ◆──────> " + first_fork_box[1])
         # bot of First Fork
         print(" " * 39 + first_fork_box[2])
-    
-    if "Eastern Corridor 2" in discovered_areas and "Southern Tunnel 2" in discovered_areas and "West Corridor" in discovered_areas and "North Corridor" in discovered_areas and "Dead End" in discovered_areas:
+
+    # 3) First Fork → South Path
+    if "Dead End" in discovered_areas:
         print(" " * 47 + "│")
         print(" " * 47 + "│")
         print(" " * 47 + "◆" + "─" * 3 + "◆")
@@ -130,23 +217,24 @@ def print_ascii_map(current_area, discovered_areas):
         print(" " * 35 + "Dead End" + " " * 9 + "│")
         print(" " * 39 + "│" + " " * 12 + "│")
         print(" " * 39 + "◆" + "─" * 12 + "◆")
-
-    elif "Eastern Corridor 2" in discovered_areas:
-        for line in vertical(pad=47, length=2):
-            print(line)
+        
+    else: 
+        if "Eastern Corridor 2" in discovered_areas:
+            for line in vertical(pad=47, length=2):
+                print(line)
+        
+        if "Southern Tunnel 2" in discovered_areas:
+            for line in corner_connector_horizontal(pad=47, length=5):
+                print(line)
     
-    elif "Southern Tunnel 2" in discovered_areas:
-        for line in corner_connector_horizontal(pad=47, length=5):
-            print(line)
+        if "West Corridor" in discovered_areas:
+            for line in vertical(pad=53, length=3):
+                print(line)
+        
+        if "North Corridor" in discovered_areas:
+            for line in corner_connector_horizontal(pad=40, length=12):
+                print(line)
     
-    elif "West Corridor" in discovered_areas:
-        for line in vertical(pad=53, length=3):
-            print(line)
-    
-    elif "North Corridor" in discovered_areas:
-        for line in corner_connector_horizontal(pad=40, length=12):
-            print(line)
-
     print("\nLegend: Yellow = Current Location | Hidden areas stay invisible\n")
 
 
@@ -210,8 +298,8 @@ northern_tunnel = Map("Northern Tunnel")
 eastern_corridor_1 = Map("Eastern Corridor 1")
 
 # Area 20: Second Split
-two_way_fork_2 = Map("Second Split")
-two_way_fork_2.set_description("""You have found another divided path!
+second_fork = Map("Second Fork")
+second_fork.set_description("""You have found another divided path!
                  - Forward (South)
                  - Right (East)""")
 
@@ -241,7 +329,14 @@ southern_tunnel_1.link_areas(first_fork, "East")
 first_fork.link_areas(north_east_corridor, "North East")
 north_east_corridor.link_areas(northern_tunnel, "North")
 northern_tunnel.link_areas(eastern_corridor_1, "East")
-eastern_corridor_1.link_areas(two_way_fork_2, "South")
+eastern_corridor_1.link_areas(second_fork, "South")
+
+# First Fork - North East Path - Reversed
+second_fork.link_areas_opposite(eastern_corridor_1, "North")
+eastern_corridor_1.link_areas_opposite(northern_tunnel, "West")
+northern_tunnel.link_areas_opposite(north_east_corridor, "South")
+north_east_corridor.link_areas_opposite(first_fork, "South West")
+
 
 # First Fork - South Path
 first_fork.link_areas(eastern_corridor_2, "South")
@@ -258,9 +353,9 @@ southern_tunnel_2.link_areas_opposite(eastern_corridor_2, "West")
 eastern_corridor_2.link_areas_opposite(first_fork, "North")
 
 # Second fork
-two_way_fork_2.link_areas(southern_dead_end, "South")
-two_way_fork_2.link_areas(deeper_cave, "East")
-southern_dead_end.link_areas(two_way_fork_2, "North")  # Goes back to the second fork
+second_fork.link_areas(southern_dead_end, "South")
+second_fork.link_areas(deeper_cave, "East")
+southern_dead_end.link_areas(second_fork, "North")  # Goes back to the second fork
 
 
 current_area = cave
@@ -282,24 +377,35 @@ while True:
         if facing_direction:
             print(f"You are currently facing: {facing_direction}")
         continue
+
+    #Developer Commands
+    if command.lower() == "First Fork DTD":
+        discovered_areas.add("The Dark Tunnel")
+        discovered_areas.add("The Small Opening")
+        discovered_areas.add("First Fork")
+        current_area = first_fork
     
     # Map Display
     if command.lower() == "map":
         clear_console()
         print_ascii_map(current_area, discovered_areas)
     
-    if command.lower() == "testing map":
+    elif command.lower() == "testing map 1":
         print(""" ___________          __________________
 |  The Cave | ─────> |The Small Opening |
  ───────────          ──────────────────
-        │                      │
-        V                      │
- _________________             │         _______________
-| The Dark Tunnel |            ◆──────> |   First Fork  |
- ─────────────────                       ───────────────
+        │                      │                         ◆───────────◆
+        V                      │                         ◆           │
+ _________________             │         _______________/      _______________
+| The Dark Tunnel |            ◆──────> |   First Fork  |     |  Second Fork  |
+ ─────────────────                       ───────────────       ───────────────
                                                │
                                                │
-                                               ◆
+                                               ◆───◆
+                                                    │
+                                   Dead End         │
+                                       │            │
+                                       ◆────────────◆
               """)
         continue
 

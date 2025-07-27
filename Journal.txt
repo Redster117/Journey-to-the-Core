@@ -65,3 +65,22 @@ Added arrows, vertical & horizontal lines, corners, and corner connectors e.g �
                                                                                    │
                                                                                    │
                                                                                    ◆
+27/7/25 - Fixed error with discovered_area The Dark Tunnel having effects on opening map whether discovered or not.
+WIP with adding temporary dev commands for teleporting to specific areas whilst discovering any skipped areas. Also adding Southern Dead End later.
+Updated testing map 1 (# = Level)
+Latest progress:
+ ___________          __________________
+|  The Cave | ─────> |The Small Opening |
+ ───────────          ──────────────────
+        │                      │                         ◆───────────◆
+        V                      │                         ◆           │
+ _________________             │         _______________/      _______________
+| The Dark Tunnel |            ◆──────> |   First Fork  |     |  Second Fork  |
+ ─────────────────                       ───────────────       ───────────────
+                                               │
+                                               │
+                                               ◆───◆
+                                                    │
+                                   Dead End         │
+                                       │            │
+                                       ◆────────────◆
