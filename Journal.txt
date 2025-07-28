@@ -84,3 +84,4 @@ Latest progress:
                                    Dead End         │
                                        │            │
                                        ◆────────────◆
+28/7/25 - Fixed dev commands and changed first fork to second fork in dev commands, Added deeper cave (level 2) to the code and the loop.

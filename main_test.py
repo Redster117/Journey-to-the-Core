@@ -209,7 +209,22 @@ def print_ascii_map(current_area, discovered_areas):
         print(" " * 39 + first_fork_box[2])
 
     # 3) First Fork → South Path
-    if "Dead End" in discovered_areas:
+    if "Southern Dead End" in discovered_areas and "Dead End" not in discovered_areas:
+        print(" " * 68 + "│")
+        print(" " * 68 + "│")
+        print(" " * 68 + "V")
+        print(" " * 60 + "Southern Dead End")
+    
+    elif "Southern Dead End" in discovered_areas and "Dead End" in discovered_areas:
+        print(" " * 47 + "│" + " " * 21 + "│")
+        print(" " * 47 + "│" + " " * 21 + "│")
+        print(" " * 47 + "◆" + "─" * 3 + "◆" + " " * 17 + "V")
+        print(" " * 52 + "│" + " " * 8 + "Southern Dead End")
+        print(" " * 35 + "Dead End" + " " * 9 + "│")
+        print(" " * 39 + "│" + " " * 12 + "│")
+        print(" " * 39 + "◆" + "─" * 12 + "◆")
+
+    elif "Dead End" in discovered_areas:
         print(" " * 47 + "│")
         print(" " * 47 + "│")
         print(" " * 47 + "◆" + "─" * 3 + "◆")
@@ -288,31 +303,64 @@ northern_dead_end = Map("Dead End")
 northern_dead_end.set_description("""You have reached a dead end, return to the last
 point you came from to continue your journey.""")
 
-# Area 17: North-East Path
+# Area 12: North-East Path
 north_east_corridor = Map("North East Corridor")
 
-# Area 18: Northern Path
+# Area 13: Northern Path
 northern_tunnel = Map("Northern Tunnel")
 
-# Area 19: East Corridor from North
+# Area 14: East Corridor from North
 eastern_corridor_1 = Map("Eastern Corridor 1")
 
-# Area 20: Second Split
+# Area 15: Second Fork
 second_fork = Map("Second Fork")
 second_fork.set_description("""You have found another divided path!
-                 - Forward (South)
-                 - Right (East)""")
+                - Right (East)
+                - Forward (South)""")
 
-# Area 21: Final Dead End
+# Area 16: Southern Dead End
 southern_dead_end = Map("Southern Dead End")
 southern_dead_end.set_description("""You have stumbled upon a dead end. Go back and
 choose another path.""")
 
-# Area 22: Deeper Cave
+# Area 17: Deeper Cave
 deeper_cave = Map("Deeper Cave")
 deeper_cave.set_description("""Congratulations! You have reached the deeper parts of
 the cave. Be aware you may find some hostile monsters and requires you to fight.
 Good luck.""")
+
+# Area 18: Third Fork
+third_fork = Map("Third Fork")
+third_fork.set_description("""You have found a third fork in the cave
+                           - Left (North)
+                           - Right (South)""")
+
+# Area 19: Northern Corridor 2
+northern_corridor_3 = Map("Norther Corridor 2")
+
+# Area 20: Fourth Fork
+fourth_fork = Map("Fourth Fork")
+fourth_fork.set_description("""You have found a fourth fork in the cave
+                            - Left (North)
+                            - Straight (East)""")
+
+# Area 21: Northern Tunnel 2 (Loop)
+northern_tunnel_2 = Map("Northern Tunnel 2")
+
+# Area 22: Eastern Tunnel 1 (Loop)
+eastern_tunnel_1 = Map("Eastern Tunnel 1")
+
+#Area 23: Southern Tunnel 3 (Loop)
+southern_tunnel_3 = Map("Southern Tunnel 3")
+
+#Area 24: Western Tunnel 1 (Loop)
+western_tunnel_1 = Map("Western Tunnel 1")
+
+#Area 25: Fourth Fork (Returned)
+fourth_fork_returned = Map("Fourth Fork")
+fourth_fork_returned.set_description("""You have found a fourth fork in the cave
+                            - Left (North)
+                            - Straight (East)""")
 
 
 # Beginning of the Cave
@@ -353,9 +401,31 @@ southern_tunnel_2.link_areas_opposite(eastern_corridor_2, "West")
 eastern_corridor_2.link_areas_opposite(first_fork, "North")
 
 # Second fork
-second_fork.link_areas(southern_dead_end, "South")
 second_fork.link_areas(deeper_cave, "East")
+second_fork.link_areas(southern_dead_end, "South")
 southern_dead_end.link_areas(second_fork, "North")  # Goes back to the second fork
+
+# Deeper Cave (Level 2)
+deeper_cave.link_areas(third_fork, "East")
+
+# Third Fork - North Path
+third_fork.link_areas(northern_corridor_3, "North")
+northern_corridor_3.link_areas(fourth_fork, "East")
+
+# Fourth Fork - North Path - Loop
+fourth_fork.link_areas(eastern_tunnel_1, "North")
+eastern_tunnel_1.link_areas(southern_tunnel_3, "East")
+southern_tunnel_3.link_areas(western_tunnel_1, "South")
+western_tunnel_1.link_areas(fourth_fork_returned, "West")
+fourth_fork_returned.link_areas(eastern_tunnel_1, "North")
+eastern_tunnel_1.link_areas_opposite(fourth_fork_returned, "South")
+southern_tunnel_3.link_areas_opposite(eastern_tunnel_1, "West")
+western_tunnel_1.link_areas_opposite(southern_tunnel_3, "North")
+fourth_fork_returned.link_areas_opposite(western_tunnel_1, "East")
+
+#Fourth Fork → Third Fork
+fourth_fork_returned.link_areas_opposite(northern_corridor_3, "West")
+northern_corridor_3.link_areas_opposite(third_fork, "South")
 
 
 current_area = cave
@@ -379,11 +449,17 @@ while True:
         continue
 
     #Developer Commands
-    if command.lower() == "First Fork DTD":
+    if command.lower() == "second fork":
         discovered_areas.add("The Dark Tunnel")
         discovered_areas.add("The Small Opening")
         discovered_areas.add("First Fork")
-        current_area = first_fork
+        discovered_areas.add("Dead End")
+        discovered_areas.add("North East Corridor")
+        discovered_areas.add("Northern Tunnel")
+        discovered_areas.add("Eastern Corridor 1")
+        discovered_areas.add("Southern Dead End")
+        discovered_areas.add("Second Fork")
+        current_area = second_fork
     
     # Map Display
     if command.lower() == "map":
