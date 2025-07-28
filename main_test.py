@@ -249,6 +249,33 @@ def print_ascii_map(current_area, discovered_areas):
         if "North Corridor" in discovered_areas:
             for line in corner_connector_horizontal(pad=40, length=12):
                 print(line)
+
+    if "Northern Corridor 3" in discovered_areas:
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        third_fork_box = draw_box("Third Fork", width=13)
+        print(" " * 30 + "│" + " " * 25 + "◆" + "─" * 11 + "◆")
+        print(" " * 30 + "│" + " " * 25 + "◆" + " " * 11 + "│")
+        print(deeper_cave_box[0] + " " * 5 + third_fork_box[0])
+        print(deeper_cave_box[1] + third_fork_box[1])
+        print(deeper_cave_box[2] + " " * 6 + third_fork_box[2])
+    
+    elif "Third Fork" in discovered_areas:
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        third_fork_box = draw_box("Third Fork", width=13)
+        for i, (line_c, line_o) in enumerate(zip(deeper_cave_box, third_fork_box)):
+            if i == 1:
+                # Only print the arrow on the middle line
+                arrow = " ─────> "
+            else:
+                arrow = "         "
+            print(line_c + arrow + line_o)
+    
+    elif "Deeper Cave" in discovered_areas:
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        print(deeper_cave_box[0])
+        print(deeper_cave_box[1])
+        print(deeper_cave_box[2])
+
     
     print("\nLegend: Yellow = Current Location | Hidden areas stay invisible\n")
 
@@ -336,7 +363,7 @@ third_fork.set_description("""You have found a third fork in the cave
                            - Right (South)""")
 
 # Area 19: Northern Corridor 2
-northern_corridor_3 = Map("Norther Corridor 2")
+northern_corridor_3 = Map("Northern Corridor 3")
 
 # Area 20: Fourth Fork
 fourth_fork = Map("Fourth Fork")
@@ -449,7 +476,7 @@ while True:
         continue
 
     #Developer Commands
-    if command.lower() == "second fork":
+    if command.lower() == "level 1":
         discovered_areas.add("The Dark Tunnel")
         discovered_areas.add("The Small Opening")
         discovered_areas.add("First Fork")
@@ -461,10 +488,49 @@ while True:
         discovered_areas.add("Second Fork")
         current_area = second_fork
     
+    if command.lower() == "level 2":
+        discovered_areas.add("The Dark Tunnel")
+        discovered_areas.add("The Small Opening")
+        discovered_areas.add("First Fork")
+        discovered_areas.add("Dead End")
+        discovered_areas.add("North East Corridor")
+        discovered_areas.add("Northern Tunnel")
+        discovered_areas.add("Eastern Corridor 1")
+        discovered_areas.add("Southern Dead End")
+        discovered_areas.add("Second Fork")
+        #Level 2
+        discovered_areas.add("Deeper Cave")
+        discovered_areas.add("Third Fork")
+        discovered_areas.add("Northern Corridor 2")
+        discovered_areas.add("Fourth Fork")
+        discovered_areas.add("Eastern Tunnel 1")
+        discovered_areas.add("Southern Tunnel 3")
+        discovered_areas.add("Western Tunnel 1")
+        discovered_areas.add("Fourth Fork (Returned)")
+        discovered_areas.add("Northern Tunnel 2")
+        current_area = third_fork
+    
     # Map Display
     if command.lower() == "map":
         clear_console()
-        print_ascii_map(current_area, discovered_areas)
+        if current_area in [second_fork, first_fork, cave, dark_tunnel, small_opening]:
+            # Level 1 map
+            level_1_areas = {area for area in discovered_areas if area in [
+                "The Cave", "The Dark Tunnel", "The Small Opening", "First Fork",
+                "Dead End", "North East Corridor", "Northern Tunnel", "Eastern Corridor 1",
+                "Southern Dead End", "Second Fork"
+            ]}
+            print_ascii_map(current_area, level_1_areas)
+        elif current_area in [third_fork, deeper_cave, northern_corridor_3, fourth_fork]:
+            # Level 2 map
+            level_2_areas = {area for area in discovered_areas if area in [
+                "Deeper Cave", "Third Fork", "Northern Corridor 2", "Fourth Fork",
+                "Eastern Tunnel 1", "Southern Tunnel 3", "Western Tunnel 1",
+                "Fourth Fork (Returned)", "Northern Tunnel 2"
+            ]}
+            print_ascii_map(current_area, level_2_areas)
+        else:
+            print("You are in an unknown area. No map available.")
     
     elif command.lower() == "testing map 1":
         print(""" ___________          __________________
