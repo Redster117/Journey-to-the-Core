@@ -250,15 +250,140 @@ def print_ascii_map(current_area, discovered_areas):
             for line in corner_connector_horizontal(pad=40, length=12):
                 print(line)
 
-    if "Northern Corridor 3" in discovered_areas:
+    if "Fourth Fork " in discovered_areas:
+        fourth_fork_returned_box = draw_box("Fourth Fork ", width=12)
         deeper_cave_box = draw_box("Deeper Cave", width=12)
         third_fork_box = draw_box("Third Fork", width=13)
-        print(" " * 30 + "│" + " " * 25 + "◆" + "─" * 11 + "◆")
-        print(" " * 30 + "│" + " " * 25 + "◆" + " " * 11 + "│")
-        print(deeper_cave_box[0] + " " * 5 + third_fork_box[0])
-        print(deeper_cave_box[1] + third_fork_box[1])
-        print(deeper_cave_box[2] + " " * 6 + third_fork_box[2])
+        arrow_right = " ─────> "
+        print(" " * 36 + "◆" + "─" * 18 + "◆")
+        print(" " * 36 + "│" + " " * 18 + "│")
+        print(" " * 36 + "│" + " " * 18 + "│")
+        print(" " * 26 + " " * 4 + fourth_fork_returned_box[0] + " " * 12 + "│")
+        print(" " * 26 + "◆" + "─" * 3 + fourth_fork_returned_box[1] + "─" * 11 + "◆")
+        print(" " * 26 + "│" + " " * 3 + fourth_fork_returned_box[2])
+        print(" " * 26 + "│")
+        print(deeper_cave_box[0] + " " * 9 + third_fork_box[0])
+        print(deeper_cave_box[1] + arrow_right + third_fork_box[1])
+        print(deeper_cave_box[2] + " " * 9 + third_fork_box[2])
+
+    elif "Western Tunnel" in discovered_areas:
+        fourth_fork_box = draw_box("Fourth Fork", width=12)
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        third_fork_box = draw_box("Third Fork", width=13)
+        arrow_right = " ─────> "
+        print(" " * 36 + "◆" + "─" * 24 + "◆")
+        print(" " * 36 + "│" + " " * 24 + "│")
+        print(" " * 30 + fourth_fork_box[0] + " " * 18 + "│")
+        print(" " * 26 + "◆" + "─" * 3 + fourth_fork_box[1] + "─" * 17 + "◆")
+        print(" " * 26 + "│" + " " * 3 + fourth_fork_box[2])
+        print(" " * 26 + "│")
+        print(deeper_cave_box[0] + " " * 9 + third_fork_box[0])
+        print(deeper_cave_box[1] + arrow_right + third_fork_box[1])
+        print(deeper_cave_box[2] + " " * 9 + third_fork_box[2])
+
+    elif "Southern Tunnel 3" in discovered_areas:
+        fourth_fork_box = draw_box("Fourth Fork", width=12)
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        third_fork_box = draw_box("Third Fork", width=13)
+        arrow_right = " ─────> "
+        print(" " * 36 + "◆" + "─" * 18 + "◆")
+        print(" " * 36 + "│" + " " * 18 + "│")
+        print(" " * 36 + "│" + " " * 18 + "│")
+        print(" " * 26 + " " * 4 + fourth_fork_box[0] + " " * 12 + "│")
+        print(" " * 26 + "◆" + "─" * 3 + fourth_fork_box[1] + " " * 11 + "◆")
+        print(" " * 26 + "│" + " " * 3 + fourth_fork_box[2])
+        print(" " * 26 + "│")
+        print(deeper_cave_box[0] + " " * 9 + third_fork_box[0])
+        print(deeper_cave_box[1] + arrow_right + third_fork_box[1])
+        print(deeper_cave_box[2] + " " * 9 + third_fork_box[2])
+
+    elif "Northern Tunnel 1 " in discovered_areas:
+        fourth_fork_box = draw_box("Fourth Fork", width=12)
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        third_fork_box = draw_box("Third Fork", width=13)
+        arrow_right = " ─────> "
+        print(" " * 61 + "◆")
+        print(" " * 61 + "│")
+        print(" " * 30 + fourth_fork_box[0] + " " * 18 + "│")
+        print(" " * 26 + "◆" + "─" * 3 + fourth_fork_box[1] + "─" * 17 + "◆")
+        print(" " * 26 + "│" + " " * 3 + fourth_fork_box[2])
+        print(" " * 26 + "│")
+        print(deeper_cave_box[0] + " " * 9 + third_fork_box[0])
+        print(deeper_cave_box[1] + arrow_right + third_fork_box[1])
+        print(deeper_cave_box[2] + " " * 9 + third_fork_box[2])
+
+    elif "Eastern Tunnel 1" in discovered_areas:
+        fourth_fork_box = draw_box("Fourth Fork", width=12)
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        third_fork_box = draw_box("Third Fork", width=13)
+        arrow_right = " ─────> "
+        print(" " * 36 + "◆" + "─" * 18 + "◆")
+        print(" " * 36 + "│")
+        print(" " * 36 + "│")
+        print(" " * 26 + " " * 4 + fourth_fork_box[0])
+        print(" " * 26 + "◆" + "─" * 3 + fourth_fork_box[1])
+        print(" " * 26 + "│" + " " * 3 + fourth_fork_box[2])
+        print(" " * 26 + "│")
+        print(deeper_cave_box[0] + " " * 9 + third_fork_box[0])
+        print(deeper_cave_box[1] + arrow_right + third_fork_box[1])
+        print(deeper_cave_box[2] + " " * 9 + third_fork_box[2])
     
+    elif "Eastern Tunnel 1 " in discovered_areas:
+        fourth_fork_box = draw_box("Fourth Fork", width=12)
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        third_fork_box = draw_box("Third Fork", width=13)
+        arrow_right = " ─────> "
+        print(" " * 26 + " " * 4 + fourth_fork_box[0])
+        print(" " * 26 + "◆" + "─" * 3 + fourth_fork_box[1] + "─" * 17 + "◆")
+        print(" " * 26 + "│" + " " * 3 + fourth_fork_box[2])
+        print(" " * 26 + "│")
+        print(deeper_cave_box[0] + " " * 9 + third_fork_box[0])
+        print(deeper_cave_box[1] + arrow_right + third_fork_box[1])
+        print(deeper_cave_box[2] + " " * 9 + third_fork_box[2])
+
+    elif "Northern Tunnel 1" in discovered_areas:
+        fourth_fork_box = draw_box("Fourth Fork", width=12)
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        third_fork_box = draw_box("Third Fork", width=13)
+        arrow_right = " ─────> "
+        print(" " * 36 + "◆")
+        print(" " * 36 + "│")
+        print(" " * 36 + "│")
+        print(" " * 26 + " " * 4 + fourth_fork_box[0])
+        print(" " * 26 + "◆" + "─" * 3 + fourth_fork_box[1])
+        print(" " * 26 + "│" + " " * 3 + fourth_fork_box[2])
+        print(" " * 26 + "│")
+        print(deeper_cave_box[0] + " " * 9 + third_fork_box[0])
+        print(deeper_cave_box[1] + arrow_right + third_fork_box[1])
+        print(deeper_cave_box[2] + " " * 9 + third_fork_box[2])
+
+    elif "Fourth Fork" in discovered_areas:
+        fourth_fork_box = draw_box("Fourth Fork", width=12)
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        third_fork_box = draw_box("Third Fork", width=13)
+        arrow_right = " ─────> "
+        print(" " * 26 + " " * 4 + fourth_fork_box[0])
+        print(" " * 26 + "◆" + "─" * 3 + fourth_fork_box[1])
+        print(" " * 26 + "│" + " " * 3 + fourth_fork_box[2])
+        print(" " * 26 + "│")
+        print(deeper_cave_box[0] + " " * 9 + third_fork_box[0])
+        print(deeper_cave_box[1] + arrow_right + third_fork_box[1])
+        print(deeper_cave_box[2] + " " * 9 + third_fork_box[2])
+
+    elif "Northern Corridor 3" in discovered_areas:
+        deeper_cave_box = draw_box("Deeper Cave", width=12)
+        third_fork_box = draw_box("Third Fork", width=13)
+        arrow_right = " ─────> "
+        print(" " * 26 + "◆")
+        print(" " * 26 + "│")
+        print(" " * 26 + "│")
+        print(deeper_cave_box[0] + " " * 9 + third_fork_box[0])
+        print(deeper_cave_box[1] + arrow_right + third_fork_box[1])
+        print(deeper_cave_box[2] + " " * 9 + third_fork_box[2])
+
+    elif "Southern Corridor" in discovered_areas:
+         print("niogwrnowiwinownfownoiw")
+
     elif "Third Fork" in discovered_areas:
         deeper_cave_box = draw_box("Deeper Cave", width=12)
         third_fork_box = draw_box("Third Fork", width=13)
@@ -371,24 +496,62 @@ fourth_fork.set_description("""You have found a fourth fork in the cave
                             - Left (North)
                             - Straight (East)""")
 
-# Area 21: Northern Tunnel 2 (Loop)
-northern_tunnel_2 = Map("Northern Tunnel 2")
+# Area 21: Northern Tunnel 1 (Loop)
+northern_tunnel_1 = Map("Northern Tunnel 1")
 
 # Area 22: Eastern Tunnel 1 (Loop)
 eastern_tunnel_1 = Map("Eastern Tunnel 1")
 
-#Area 23: Southern Tunnel 3 (Loop)
+# Area 23: Southern Tunnel 3 (Loop)
 southern_tunnel_3 = Map("Southern Tunnel 3")
 
-#Area 24: Western Tunnel 1 (Loop)
-western_tunnel_1 = Map("Western Tunnel 1")
-
-#Area 25: Fourth Fork (Returned)
-fourth_fork_returned = Map("Fourth Fork")
+# Area 24: Fourth Fork Returned
+fourth_fork_returned = Map("Fourth Fork ")
 fourth_fork_returned.set_description("""You have found a fourth fork in the cave
                             - Left (North)
                             - Straight (East)""")
 
+# Area 25: Fourth Fork East Path
+eastern_tunnel_2 = Map("Eastern Tunnel 1 ")
+
+# Area 26: Northern Tunnel East Path
+northern_tunnel_2 = Map("Northern Tunnel 1 ")
+
+# Area 27: Western Tunnel East Path
+western_tunnel = Map ("Western Tunnel")
+
+# Area 28: Third Fork South Path
+southern_corridor = Map("Southern Corridor")
+
+# Area 29: Southern Corridor → Eastern Corridor
+eastern_corridor_3 = Map("Eastern Corridor 3")
+
+# Area 30: Fifth Fork
+fifth_fork = Map("Fifth Fork")
+fifth_fork.set_description("""You have found a fifth fork in the deeper cave
+                            - Left (North)
+                            - Straight (East)""")
+
+# Area 31: Fifth Fork - North Path (Zigzag)
+northern_tunnel_3 = Map("Northern Tunnel 2")
+
+# Area 32: North → East
+eastern_tunnel_3 = Map("Eastern Tunnel 2")
+
+# Area 33: East → North
+northern_tunnel_4 = Map("Northern Tunnel 3")
+
+# Area 34: North → East
+eastern_tunnel_4 = Map("Eastern Tunnel 3")
+
+# Area 35: East → North
+northern_tunnel_5 = Map("Northern Tunnel 4")
+
+# Area 36: North → East
+eastern_tunnel_5 = Map("Eastern Tunnel 4")
+
+# Area 37: North → Northern Dead End
+northern_dead_end_1 = Map("Northern Dead End 1")
 
 # Beginning of the Cave
 cave.link_areas(small_opening, "East")
@@ -411,7 +574,6 @@ second_fork.link_areas_opposite(eastern_corridor_1, "North")
 eastern_corridor_1.link_areas_opposite(northern_tunnel, "West")
 northern_tunnel.link_areas_opposite(north_east_corridor, "South")
 north_east_corridor.link_areas_opposite(first_fork, "South West")
-
 
 # First Fork - South Path
 first_fork.link_areas(eastern_corridor_2, "South")
@@ -439,20 +601,40 @@ deeper_cave.link_areas(third_fork, "East")
 third_fork.link_areas(northern_corridor_3, "North")
 northern_corridor_3.link_areas(fourth_fork, "East")
 
-# Fourth Fork - North Path - Loop
-fourth_fork.link_areas(eastern_tunnel_1, "North")
-eastern_tunnel_1.link_areas(southern_tunnel_3, "East")
-southern_tunnel_3.link_areas(western_tunnel_1, "South")
-western_tunnel_1.link_areas(fourth_fork_returned, "West")
-fourth_fork_returned.link_areas(eastern_tunnel_1, "North")
-eastern_tunnel_1.link_areas_opposite(fourth_fork_returned, "South")
-southern_tunnel_3.link_areas_opposite(eastern_tunnel_1, "West")
-western_tunnel_1.link_areas_opposite(southern_tunnel_3, "North")
-fourth_fork_returned.link_areas_opposite(western_tunnel_1, "East")
+# Fourth Fork - North Path - North Path - Loop
+fourth_fork.link_areas(northern_tunnel_1, "North")
+northern_tunnel_1.link_areas(eastern_tunnel_1, "East")
+eastern_tunnel_1.link_areas(southern_tunnel_3, "South")
+southern_tunnel_3.link_areas(fourth_fork_returned, "West")
+northern_tunnel_1.link_areas_opposite(fourth_fork_returned, "South")
+eastern_tunnel_1.link_areas_opposite(northern_tunnel_1, "West")
+southern_tunnel_3.link_areas_opposite(eastern_tunnel_1, "North")
+fourth_fork_returned.link_areas_opposite(southern_tunnel_3, "East")
 
-#Fourth Fork → Third Fork
+# Fourth Fork - North Path - East Path - Loop
+fourth_fork.link_areas(eastern_tunnel_2, "East")
+eastern_tunnel_2.link_areas(northern_tunnel_2, "North")
+northern_tunnel_2.link_areas(western_tunnel, "West")
+western_tunnel.link_areas(fourth_fork, "South")
+
+# Fourth Fork → Third Fork
 fourth_fork_returned.link_areas_opposite(northern_corridor_3, "West")
 northern_corridor_3.link_areas_opposite(third_fork, "South")
+
+# Third Fork South Path
+third_fork.link_areas(southern_corridor, "South")
+southern_corridor.link_areas(fifth_fork, "East")
+
+# Fifth Fork - North Path
+fifth_fork.link_areas(northern_tunnel_3, "North")
+northern_tunnel_3.link_areas(eastern_tunnel_3, "East")
+eastern_tunnel_3.link_areas(northern_tunnel_4, "North")
+northern_tunnel_4.link_areas(eastern_tunnel_4, "East")
+eastern_tunnel_4.link_areas(northern_tunnel_5, "North")
+northern_tunnel_5.link_areas(eastern_tunnel_5, "East")
+eastern_tunnel_5.link_areas(northern_dead_end_1, "North")
+
+
 
 
 current_area = cave
@@ -501,32 +683,55 @@ while True:
         #Level 2
         discovered_areas.add("Deeper Cave")
         discovered_areas.add("Third Fork")
-        discovered_areas.add("Northern Corridor 2")
+        discovered_areas.add("Northern Corridor 3")
         discovered_areas.add("Fourth Fork")
+        discovered_areas.add("Northern Tunnel 1")
         discovered_areas.add("Eastern Tunnel 1")
         discovered_areas.add("Southern Tunnel 3")
-        discovered_areas.add("Western Tunnel 1")
-        discovered_areas.add("Fourth Fork (Returned)")
+        discovered_areas.add("Fourth Fork ")
+        discovered_areas.add("Eastern Tunnel 1 ")
+        discovered_areas.add("Northern Tunnel 1 ")
+        discovered_areas.add("Southern Corridor")
+        discovered_areas.add("Fifth Fork")
         discovered_areas.add("Northern Tunnel 2")
+        discovered_areas.add("Eastern Tunnel 2")
+        discovered_areas.add("Northern Tunnel 3")
+        discovered_areas.add("Eastern Tunnel 3")
+        discovered_areas.add("Northern Tunnel 4")
+        discovered_areas.add("Eastern Tunnel 4")
+        discovered_areas.add("Northern Tunnel 5")
+        discovered_areas.add("Eastern Tunnel 5")
+        discovered_areas.add("Northern Dead End 1")
         current_area = third_fork
-    
+
     # Map Display
     if command.lower() == "map":
         clear_console()
-        if current_area in [second_fork, first_fork, cave, dark_tunnel, small_opening]:
+        if current_area in [second_fork, first_fork, cave, dark_tunnel, small_opening, northern_dead_end, north_east_corridor,
+                            northern_tunnel, eastern_corridor_2, southern_dead_end, southern_tunnel_2, west_corridor, north_corridor,
+                            ]:
             # Level 1 map
             level_1_areas = {area for area in discovered_areas if area in [
                 "The Cave", "The Dark Tunnel", "The Small Opening", "First Fork",
-                "Dead End", "North East Corridor", "Northern Tunnel", "Eastern Corridor 1",
-                "Southern Dead End", "Second Fork"
+                "Dead End", "North East Corridor", "Northern Tunnel", "Eastern Corridor 2",
+                "Southern Dead End", "Second Fork", "Southern Tunnel 2", "West Corridor", "North Corridor",
+                "Eastern Corridor 1"
             ]}
             print_ascii_map(current_area, level_1_areas)
-        elif current_area in [third_fork, deeper_cave, northern_corridor_3, fourth_fork]:
+        elif current_area in [
+            third_fork, deeper_cave, northern_corridor_3, fourth_fork, northern_tunnel_1, eastern_tunnel_1, southern_tunnel_3, 
+            fourth_fork_returned, eastern_tunnel_2, northern_tunnel_2, western_tunnel, southern_corridor, fifth_fork, northern_tunnel_3,
+            eastern_tunnel_3, northern_tunnel_4, eastern_tunnel_4, northern_tunnel_5, eastern_tunnel_5, northern_dead_end_1
+        ]:
             # Level 2 map
             level_2_areas = {area for area in discovered_areas if area in [
-                "Deeper Cave", "Third Fork", "Northern Corridor 2", "Fourth Fork",
-                "Eastern Tunnel 1", "Southern Tunnel 3", "Western Tunnel 1",
-                "Fourth Fork (Returned)", "Northern Tunnel 2"
+                "Deeper Cave", "Third Fork", "Northern Corridor 3", "Fourth Fork",
+                "Northern Tunnel 1", "Eastern Tunnel 1", "Southern Tunnel 3", "Fourth Fork ",
+                "Eastern Tunnel 1 ", "Northern Tunnel 1 ", "Southern Tunnel 3 ", "Western Tunnel",
+                "Southern Corridor", "Fifth Fork", "Northern Tunnel 2", "Eastern Tunnel 2", "Northern Tunnel 3",
+                "Eastern Tunnel 3", "Northern Tunnel 4", "Eastern Tunnel 4", "Northern Tunnel 5", "Eastern Tunnel 5",
+                "Northern Dead End 1"
+                
             ]}
             print_ascii_map(current_area, level_2_areas)
         else:
@@ -549,6 +754,10 @@ while True:
                                        │            │
                                        ◆────────────◆
               """)
+
+    elif command.lower() == "testing map 2":
+        print(""" ___________          __________________""")
+
         continue
 
     # Movement (Full Direction Names & Shortcuts)

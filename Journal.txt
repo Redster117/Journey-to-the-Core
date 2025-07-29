@@ -86,3 +86,16 @@ Latest progress:
                                        ◆────────────◆
 28/7/25 - Fixed dev commands and changed first fork to second fork in dev commands, Added deeper cave (level 2) to the code and the loop.
 Fixing the northern corridor 3 in the map layout.
+
+29/7/25 - Added loop in deeper cave (Level 2)in fourth fork, fixed the northern corridor 3. WIP on fifth fork and zigzag path in map layout.
+Latest progress:
+                                    ◆──────────────────◆
+                                    │                  │
+                                    │                  │
+                               ____________            │
+                          ◆───|Fourth Fork |───────────◆
+                          │    ────────────
+                          │
+ ____________          _____________
+|Deeper Cave | ─────> |  Third Fork |
+ ────────────          ─────────────
