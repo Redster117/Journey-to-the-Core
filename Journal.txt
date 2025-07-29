@@ -90,6 +90,7 @@ Fixing the northern corridor 3 in the map layout.
 29/7/25 - Added loop in deeper cave (Level 2)in fourth fork, fixed the northern corridor 3. Added the zigzag and dead end in the map layout.
 Created more areas from Fifth Fork - South Path to Infernal Hollow (Level 3), which results in a total of 49 areas created.
 WIP: Adding areas Fifth Fork - South Path to Infernal Hollow to the map layout, create a draft map for the new and final level "Infernal Hollow" in excel.
+Updated testing map 2 (# = Level)
 Latest progress:
                                     ◆──────────────────◆
                                     │                  │

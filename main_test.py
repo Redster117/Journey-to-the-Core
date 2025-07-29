@@ -753,8 +753,8 @@ southern_dead_end.link_areas(second_fork, "North")  # Goes back to the second fo
 deeper_cave.link_areas(third_fork, "East")
 
 # Third Fork - North Path
-third_fork.link_areas(northern_corridor, "North")
-northern_corridor.link_areas(fourth_fork, "East")
+third_fork.link_areas(northern_corridor_1, "North")
+northern_corridor_1.link_areas(fourth_fork, "East")
 
 # Fourth Fork - North Path - North Path - Loop
 fourth_fork.link_areas(northern_tunnel_1, "North")
