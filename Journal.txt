@@ -107,3 +107,4 @@ Latest progress:
                              │         ____________
                              ◆──────> | Fifth Fork |
                                        ────────────
+30/7/25 - Finished adding the areas 38 - 48 in level 2 deeper cave and currently adding the areas to the map layout.

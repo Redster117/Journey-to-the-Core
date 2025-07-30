@@ -483,7 +483,37 @@ def print_ascii_map(current_area, discovered_areas):
         print(deeper_cave_box[1])
         print(deeper_cave_box[2])
 
-    if "Eastern Tunnel 2" in discovered_areas:
+    if "South Eastern Tunnel" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆" + "─" * 3 + "◆")
+
+
+    elif "Eastern Corridor 4" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆")
+
+    elif "Southern Corridor 1" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2])
+
+    elif "Eastern Tunnel 2" in discovered_areas:
         fifth_fork_box = draw_box("Fifth Fork", width=12)
         arrow_right = "──────> "
         print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
@@ -502,7 +532,6 @@ def print_ascii_map(current_area, discovered_areas):
         print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1])
         print(" " * 38 + fifth_fork_box[2])
 
-
     elif "Fifth Fork" in discovered_areas:
         fifth_fork_box = draw_box("Fifth Fork", width=12)
         arrow_right = "──────> "
@@ -511,7 +540,6 @@ def print_ascii_map(current_area, discovered_areas):
         print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
         print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1])
         print(" " * 38 + fifth_fork_box[2])
-
 
     elif "Southern Corridor" in discovered_areas:
         for line in corner_down(pad=29):
@@ -801,6 +829,31 @@ northern_tunnel_5.link_areas_opposite(eastern_tunnel_4, "South")
 eastern_tunnel_5.link_areas_opposite(northern_tunnel_5, "West")
 northern_dead_end_1.link_areas_opposite(eastern_tunnel_5, "South")
 
+# Fifth Fork - East Path
+fifth_fork.link_areas(southern_corridor_1, "East")
+southern_corridor_1.link_areas(eastern_corridor_4, "South")
+eastern_corridor_4.link_areas(south_eastern_tunnel, "East")
+south_eastern_tunnel.link_areas(eastern_tunnel_6, "South East")
+eastern_tunnel_6.link_areas(southern_tunnel_4, "East")
+southern_tunnel_4.link_areas(south_eastern_corridor, "South")
+south_eastern_corridor.link_areas(eastern_corridor_5, "South East")
+eastern_corridor_5.link_areas(northern_corridor_2, "East")
+northern_corridor_2.link_areas(eastern_corridor_7, "North")
+eastern_corridor_7.link_areas(northern_corridor_3, "East")
+northern_corridor_3.link_areas(eastern_corridor_8, "North")
+
+#Fifth Fork - East Path - Reversed
+eastern_corridor_8.link_areas_opposite(northern_corridor_3, "South")
+northern_corridor_3.link_areas_opposite(eastern_corridor_7, "West")
+eastern_corridor_7.link_areas_opposite(northern_corridor_2, "South")
+northern_corridor_2.link_areas_opposite(eastern_corridor_5, "West")
+eastern_corridor_5.link_areas_opposite(south_eastern_corridor, "North West")
+south_eastern_corridor.link_areas_opposite(southern_tunnel_4, "North")
+southern_tunnel_4.link_areas_opposite(eastern_tunnel_6, "West")
+eastern_tunnel_6.link_areas_opposite(south_eastern_tunnel, "North West")
+south_eastern_tunnel.link_areas_opposite(eastern_corridor_4, "West")
+eastern_corridor_4.link_areas_opposite(southern_corridor_1, "North")
+southern_corridor_1.link_areas_opposite(fifth_fork, "West")
 
 
 
