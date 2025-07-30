@@ -109,6 +109,15 @@ Latest progress:
                                        ────────────
 30/7/25 - Removed character.py and char_test.py as they have no purpose in this code.
 Finished Level 2 map layout and moving on to Level 3 - Infernal Hollow
+Ran tests for both level 1 and 2
+Fixed Fourth Fork, Northern Dead End 1, Incave Tunnel causing errors if not all of them are discovered.
+e.g:
+User discovers
+- Incave Tunnel
+- Northern Dead End 1, Incave Tunnel
+- Fourth Fork, Northern Dead End 1, Incave Tunnel
+- Fourth Fork, Incave Tunnel
+- Fourth Fork Northern Dead End 1
 Updated testing map 2 (# = Level)
 Latest progress:
                                     ◆──────────────────◆
