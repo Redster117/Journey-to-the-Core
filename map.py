@@ -46,12 +46,6 @@ class Map:
             for direction in self.linked_areas:
                 print(direction)
 
-    def set_character(self, new_character):
-        self.character = new_character
-
-    def get_character(self):
-        return self.character
-
     def link_areas(self, area_to_link, direction, bidirectional=False):
         """Links this area to another area in a specified direction.
            If bidirectional is True, links the reverse direction too."""

@@ -1007,8 +1007,6 @@ discovered_areas.add(current_area.get_name())
 while True:
     print("\n")
     current_area.get_details()
-    if current_area.get_character():
-        current_area.get_character().describe()
 
     command = input("> ").strip()
 
