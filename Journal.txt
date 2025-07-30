@@ -107,4 +107,28 @@ Latest progress:
                              │         ____________
                              ◆──────> | Fifth Fork |
                                        ────────────
-30/7/25 - Finished adding the areas 38 - 48 in level 2 deeper cave and currently adding the areas to the map layout.
+30/7/25 - Finished Level 2 map layout and moving on to Level 3 - Infernal Hollow
+Updated testing map 2 (# = Level)
+Latest progress:
+                                    ◆──────────────────◆
+                                    │                  │
+                                    │                  │
+                               ____________            │
+                          ◆───|Fourth Fork |───────────◆
+                          │    ────────────             Dead End
+                          │                         ◆───────◆
+ ____________          _____________                │
+|Deeper Cave |──────> |  Third Fork |            ◆──◆
+ ────────────          ─────────────             │
+                             │                ◆──◆
+                             │                │
+                             │         ____________
+                             ◆──────> | Fifth Fork |───◆
+                                       ────────────    │
+                                                       ◆───◆
+                                                            \ 
+                                                             ◆───◆         ◆───     ──────> 
+                                                                 │         │
+                                                                 ◆     ◆───◆
+                                                                  \    │
+                                                                   ◆───◆

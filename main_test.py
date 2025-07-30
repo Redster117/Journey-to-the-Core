@@ -483,7 +483,7 @@ def print_ascii_map(current_area, discovered_areas):
         print(deeper_cave_box[1])
         print(deeper_cave_box[2])
 
-    if "South Eastern Tunnel" in discovered_areas:
+    if "Incaved Tunnel" in discovered_areas:
         fifth_fork_box = draw_box("Fifth Fork", width=12)
         arrow_right = "──────> "
         print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
@@ -492,7 +492,141 @@ def print_ascii_map(current_area, discovered_areas):
         print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
         print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
         print(" " * 55 + "◆" + "─" * 3 + "◆")
+        print(" " * 59 + " \ ")
+        print(" " * 61 + "◆" + "─" * 3 + "◆" + " " * 9 + "◆" + "─" * 3 + " " * 5 + arrow_right)
+        print(" " * 65 + "│" + " " * 9 + "│")
+        print(" " * 65 + "◆" + " " * 5 + "◆" + "─" * 3 + "◆")
+        print(" " * 65 + " \ " + " " * 3 + "│")
+        print(" " * 67 + "◆" + "─" * 3 + "◆")
 
+    elif "Eastern Corridor 8" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆" + "─" * 3 + "◆")
+        print(" " * 59 + " \ ")
+        print(" " * 61 + "◆" + "─" * 3 + "◆" + " " * 9 + "◆")
+        print(" " * 65 + "│" + " " * 9 + "│")
+        print(" " * 65 + "◆" + " " * 5 + "◆" + "─" * 3 + "◆")
+        print(" " * 65 + " \ " + " " * 3 + "│")
+        print(" " * 67 + "◆" + "─" * 3 + "◆")
+
+    elif "Northern Corridor 3" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆" + "─" * 3 + "◆")
+        print(" " * 59 + " \ ")
+        print(" " * 61 + "◆" + "─" * 3 + "◆")
+        print(" " * 65 + "│")
+        print(" " * 65 + "◆" + " " * 5 + "◆" + "─" * 3 + "◆")
+        print(" " * 65 + " \ " + " " * 3 + "│")
+        print(" " * 67 + "◆" + "─" * 3 + "◆")
+
+    elif "Eastern Corridor 7" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆" + "─" * 3 + "◆")
+        print(" " * 59 + " \ ")
+        print(" " * 61 + "◆" + "─" * 3 + "◆")
+        print(" " * 65 + "│")
+        print(" " * 65 + "◆" + " " * 5 + "◆")
+        print(" " * 65 + " \ " + " " * 3 + "│")
+        print(" " * 67 + "◆" + "─" * 3 + "◆")
+
+    elif "Northern Corridor 2" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆" + "─" * 3 + "◆")
+        print(" " * 59 + " \ ")
+        print(" " * 61 + "◆" + "─" * 3 + "◆")
+        print(" " * 65 + "│")
+        print(" " * 65 + "◆")
+        print(" " * 65 + " \ ")
+        print(" " * 67 + "◆" + "─" * 3 + "◆")
+
+    elif "Eastern Corridor 5" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆" + "─" * 3 + "◆")
+        print(" " * 59 + " \ ")
+        print(" " * 61 + "◆" + "─" * 3 + "◆")
+        print(" " * 65 + "│")
+        print(" " * 65 + "◆")
+        print(" " * 65 + " \ ")
+        print(" " * 67 + "◆")
+
+    elif "South Eastern Corridor" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆" + "─" * 3 + "◆")
+        print(" " * 59 + " \ ")
+        print(" " * 61 + "◆" + "─" * 3 + "◆")
+        print(" " * 65 + "│")
+        print(" " * 65 + "◆")
+
+    elif "Southern Tunnel 4" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆" + "─" * 3 + "◆")
+        print(" " * 59 + " \ ")
+        print(" " * 61 + "◆" + "─" * 3 + "◆")
+
+    elif "Eastern Tunnel 6" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆" + "─" * 3 + "◆")
+        print(" " * 59 + " \ ")
+        print(" " * 61 + "◆")
+
+
+    elif "South Eastern Tunnel" in discovered_areas:
+        fifth_fork_box = draw_box("Fifth Fork", width=12)
+        arrow_right = "──────> "
+        print(" " * 29 + "│" + " " * 16 + "◆" + "─" * 2 + "◆")
+        print(" " * 29 + "│" + " " * 16 + "│")
+        print(" " * 29 + "│" + " " * 8 + fifth_fork_box[0])
+        print(" " * 29 + "◆" + arrow_right + fifth_fork_box[1] + "─" * 3 + "◆")
+        print(" " * 38 + fifth_fork_box[2] + " " *  4 + "│")
+        print(" " * 55 + "◆" + "─" * 3 + "◆")
 
     elif "Eastern Corridor 4" in discovered_areas:
         fifth_fork_box = draw_box("Fifth Fork", width=12)
@@ -729,6 +863,12 @@ northern_corridor_3 = Map("Northern Corridor 3")
 # Area 48: North → East
 eastern_corridor_8 = Map("Eastern Corridor 8")
 
+# Area 49: East Incaved
+incaved_tunnel = Map("Incaved Tunnel")
+incaved_tunnel.set_description("""Oh fuck!!!                    U just got trapped!!!
+                              It seems you cannot leave now, 
+                              so your only option is to now proceed through the cave.""")
+
 # Area 49: East → Infernal Hollow
 infernal_hollow = Map("Infernal Hollow")
 infernal_hollow.set_description("""Amazing Job! You have finally reached the lowest level
@@ -841,6 +981,8 @@ eastern_corridor_5.link_areas(northern_corridor_2, "East")
 northern_corridor_2.link_areas(eastern_corridor_7, "North")
 eastern_corridor_7.link_areas(northern_corridor_3, "East")
 northern_corridor_3.link_areas(eastern_corridor_8, "North")
+eastern_corridor_8.link_areas(incaved_tunnel, "East")
+incaved_tunnel.link_areas(infernal_hollow, "East")
 
 #Fifth Fork - East Path - Reversed
 eastern_corridor_8.link_areas_opposite(northern_corridor_3, "South")
@@ -922,18 +1064,19 @@ while True:
         discovered_areas.add("Northern Tunnel 5")
         discovered_areas.add("Eastern Tunnel 5")
         discovered_areas.add("Northern Dead End 1")
-        #discovered_areas.add("Southern Corridor 1")
-        #discovered_areas.add("Eastern Corridor 4")
-        #discovered_areas.add("South Eastern Tunnel")
-        #discovered_areas.add("Eastern Tunnel 6")
-        #discovered_areas.add("Southern Tunnel 4")
-        #discovered_areas.add("South Eastern Corridor")
-        #discovered_areas.add("Eastern Corridor 5")
-        #discovered_areas.add("Northern Corridor 2")
-        #discovered_areas.add("Eastern Corridor 7")
-        #discovered_areas.add("Northern Corridor 3")
-        #discovered_areas.add("Eastern Corridor 8")
-        current_area = fifth_fork
+        discovered_areas.add("Southern Corridor 1")
+        discovered_areas.add("Eastern Corridor 4")
+        discovered_areas.add("South Eastern Tunnel")
+        discovered_areas.add("Eastern Tunnel 6")
+        discovered_areas.add("Southern Tunnel 4")
+        discovered_areas.add("South Eastern Corridor")
+        discovered_areas.add("Eastern Corridor 5")
+        discovered_areas.add("Northern Corridor 2")
+        discovered_areas.add("Eastern Corridor 7")
+        discovered_areas.add("Northern Corridor 3")
+        discovered_areas.add("Eastern Corridor 8")
+        discovered_areas.add("Incaved Tunnel")
+        current_area = incaved_tunnel
 
     # Map Display
     if command.lower() == "map":
@@ -954,8 +1097,7 @@ while True:
             fourth_fork_returned, eastern_tunnel_2, northern_tunnel_2, western_tunnel, southern_corridor, fifth_fork, northern_tunnel_3,
             eastern_tunnel_3, northern_tunnel_4, eastern_tunnel_4, northern_tunnel_5, eastern_tunnel_5, northern_dead_end_1, southern_corridor_1,
             eastern_corridor_4, south_eastern_tunnel, eastern_tunnel_6, southern_tunnel_4, south_eastern_corridor, eastern_corridor_5,
-            northern_corridor_2, eastern_corridor_7, northern_corridor_3, eastern_corridor_8
-            
+            northern_corridor_2, eastern_corridor_7, northern_corridor_3, eastern_corridor_8, incaved_tunnel
         ]:
             # Level 2 map
             level_2_areas = {area for area in discovered_areas if area in [
@@ -966,13 +1108,22 @@ while True:
                 "Eastern Tunnel 3", "Northern Tunnel 4", "Eastern Tunnel 4", "Northern Tunnel 5", "Eastern Tunnel 5",
                 "Northern Dead End 1", "Southern Corridor 1", "Eastern Corridor 4", "South Eastern Tunnel", "Eastern Tunnel 6",
                 "Southern Tunnel 4", "South Eastern Corridor", "Eastern Corridor 5", "Northern Corridor 2",
-                "Eastern Corridor 7", "Northern Corridor 3", "Eastern Corridor 8"
+                "Eastern Corridor 7", "Northern Corridor 3", "Eastern Corridor 8", "Incaved Tunnel"
             ]}
             print_ascii_map(current_area, level_2_areas)
+        elif current_area in [
+            infernal_hollow
+        ]:
+            # Level 3 map
+            level_3_areas = {area for area in discovered_areas if area in [
+                "Infernal Hollow"
+            ]}
+            print_ascii_map(current_area, level_3_areas)
         else:
             print("You are in an unknown area. No map available.")
     
     elif command.lower() == "testing map 1":
+        clear_console()
         print(""" ___________          __________________
 |  The Cave | ─────> |The Small Opening |
  ───────────          ──────────────────
@@ -991,6 +1142,7 @@ while True:
               """)
 
     elif command.lower() == "testing map 2":
+        clear_console()
         print("""                                    ◆──────────────────◆
                                     │                  │
                                     │                  │
@@ -1004,8 +1156,15 @@ while True:
                              │                ◆──◆
                              │                │
                              │         ____________
-                             ◆──────> | Fifth Fork |
-                                       ────────────""")
+                             ◆──────> | Fifth Fork |───◆
+                                       ────────────    │
+                                                       ◆───◆
+                                                            \ 
+                                                             ◆───◆         ◆───     ──────> 
+                                                                 │         │
+                                                                 ◆     ◆───◆
+                                                                  \    │
+                                                                   ◆───◆""")
 
         continue
 
