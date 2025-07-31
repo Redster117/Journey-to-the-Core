@@ -142,3 +142,30 @@ Latest progress:
                                                                  ◆     ◆───◆
                                                                   \    │
                                                                    ◆───◆
+31/7/25 - Completed Level 3 and added the last two areas; Collapsed Floor and to be continued. Moved the whole code from main_test.py to main.py.
+Updated the remaining areas at the starting point for the code, and removed main_test. The last two areas after level 3 is technically level 4.
+While there are a couple of bugs for level 3 with the map layout showing a wide combination of discovered and undiscovered areas, 
+the code is completed with a total of 2,774 lines.
+Added testing map 3 (# = Level)
+Latest progress:
+                                               Dead End
+                           Dead End              /
+                               \                /
+                                \  ____________/
+                                  |Eighth Fork |
+                                   ────────────
+                                      ◆
+ _______________         ____________/      ◆
+|Infernal Hollow| ────> | Sixth Fork |     / \ 
+ ───────────────         ────────────     /  Dead End
+                              │          ◆
+                              │    ______________
+                              ◆──>| Seventh Fork |────────────────◆
+                                   ──────────────                  \ 
+                                        │                           ◆───◆
+                                        │                               │
+                                        │                               ◆
+                                  ◆─────◆                                \ 
+                                  │                                       ◆
+                                  │
+                               Dead End
