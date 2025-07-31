@@ -2082,7 +2082,7 @@ choose another path.""")
 # Area 21: Deeper Cave
 deeper_cave = Map("Deeper Cave")
 deeper_cave.set_description("""Congratulations! You have reached the deeper parts of
-the cave. Be aware you may find some hostile monsters and requires you to fight.
+the cave. The map now shows a larger version of the cave system previously.
 Good luck.""")
 
 # Area 22: Third Fork
